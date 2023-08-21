@@ -1,0 +1,22 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install build tools
+        run: |
+          sudo apt update
+          sudo apt install build-essential
+
+      - name: Checkout project sources
+        uses: actions/checkout@v3
+
+      - name: Build
+        run: g++ ./src/*.cpp
