@@ -9,7 +9,7 @@ using std::cout;
 
 //DEFIFINTIONS
 //Constructor
-HouseHold::HouseHold (string name = "") {this->name = name; }
+HouseHold::HouseHold (string name) {this->name = name; }
 
 //Method
 void HouseHold::showinfo(){
