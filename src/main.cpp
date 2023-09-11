@@ -1,16 +1,25 @@
 #include <iostream>
-#include "HouseHold.h" //include header file of the module
-#include "function.h" //include header file of the function lib
+#include <ostream>
 
-using std::string;
-using std::cout;
+int main() {
+    // clear the console
+    std::cout << "\033[2J\033[1;1H";
 
-int main(){
-    HouseHold hh1("HouseHold 1"), hh2("HouseHold 2");
-    hh1.purchasedPerson = &hh2;    //hh2 bought the house from hh1
+    // welcome screen
+    std::cout << "EEET2482 ASSIGNMENT" << std::endl
+              << "MOTORBIKE RENTAL APPLICATION" << std::endl
+              << std::endl
+              << "Instructor: Dr. Ling Huo Chong" << std::endl
+              << "Group: Group 18" << std::endl
+              << "s3978796, Do Khoa Nguyen" << std::endl
+              << "s3979562, Tran The Quang Minh" << std::endl
+              << "s3958668, Bui Sy Quang" << std::endl
+              << "s3854233, Hoang Minh Khoi" << std::endl
+              << std::endl;
 
-    hh1.showinfo();
-    aFunction();
-
+    // prompt the user to login
+    std::cout << "Use the app as: [1] Guest, [2] Member, [3] Admin" << std::endl 
+              << std::endl;
+    std::cout << "Enter your choice: ";
     return 0;
 }
