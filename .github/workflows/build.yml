@@ -2,21 +2,17 @@ name: build
 
 on:
   push:
-    branches:
-      - main
   pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install build tools
-        run: |
-          sudo apt update
-          sudo apt install build-essential
-
       - name: Checkout project sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Install zig
+        uses: goto-bus-stop/setup-zig@v2
 
       - name: Build
-        run: g++ ./src/*.cpp
+        run: zig c++ ./src/*.cpp
