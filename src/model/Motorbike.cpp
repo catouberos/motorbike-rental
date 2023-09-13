@@ -1,31 +1,45 @@
+#include <string>
+#include <sstream>
+
 #include "Motorbike.h"
-void Motorbike::printMotorbike()
+
+std::string Motorbike::toString()
 {
-    std::cout << "Motorbike ID: " << m_motorbikeID << '\n';
-    std::cout << "Owner ID: " << m_ownerID << '\n';
-    std::cout << "Renter ID: " << m_renterID << '\n';
-    std::cout << "Model: " << m_model << '\n';
-    std::cout << "Color: " << m_color << '\n';
-    std::cout << "Engine size: " << m_engineSize << '\n';
-    std::cout << "Transmission mode: " << m_transmissionMode << '\n';
-    std::cout << "Year made: " << m_yearMade << '\n';
-    std::cout << "Description: " << m_description << '\n';
-    std::cout << "Motorbike Rating: " << m_motorbikeRating << '\n';
-    std::cout << "Required renter rating: " << m_requiredRating << '\n';
-    std::cout << "Consuming point: " << m_consumingPoint << '\n';
-    std::cout << "Location: " << m_location << "\n";
-    std::cout << "Available from:\n";
-    m_startDate.printDate();
-    std::cout << " to " << "\n";
-    m_endDate.printDate();
-    std::cout << "\n";
+    std::ostringstream oss;
+
+    oss << "Motorbike ID: " << id_ << std::endl
+        << "Owner ID: " << owner_->id_ << std::endl
+        << "Renter ID: " << renter_->id_ << std::endl
+        << "Model: " << model_ << std::endl
+        << "Color: " << color_ << std::endl
+        << "Engine size: " << engine_size_ << std::endl
+        << "Transmission mode: " << transmission_mode_ << std::endl
+        << "Year made: " << year_made_ << std::endl
+        << "Description: " << description_ << std::endl
+        << "Motorbike Rating: " << rating_ << std::endl
+        << "Required renter rating: " << required_rating_ << std::endl
+        << "Consuming point: " << point_consume_ << std::endl
+        << "Location: " << location_ << std::endl
+        << "Available from:";
+
+    return oss.str();
 }
 
-std::string Motorbike::toFile()
+std::string Motorbike::serialize()
 {
-    return m_model + ',' + m_color + ',' + m_transmissionMode + ',' + m_description + ',' + m_location + ',' + std::to_string(m_engineSize) + ','
-        + std::to_string(m_yearMade) + ',' + std::to_string(m_motorbikeRating) + ',' + std::to_string(m_requiredRating) + ',' + std::to_string(m_consumingPoint) + ','
-        + std::to_string(m_startDate.m_day) + ',' + std::to_string(m_startDate.m_month) + ',' + std::to_string(m_startDate.m_year) + ','
-        + std::to_string(m_endDate.m_day) + ',' + std::to_string(m_endDate.m_month) + ',' + std::to_string(m_endDate.m_year) + ','
-        + std::to_string(m_motorbikeID) + ',' + std::to_string(m_ownerID) + ',' + std::to_string(m_renterID) + '\n';
+    return model_ + ',' +
+           color_ + ',' +
+           transmission_mode_ + ',' +
+           description_ + ',' +
+           location_ + ',' +
+           engine_size_ + ',' +
+           std::to_string(year_made_) + ',' +
+           std::to_string(rating_) + ',' +
+           std::to_string(required_rating_) + ',' +
+           std::to_string(point_consume_) + ',' +
+           start_date_.toString() + ',' +
+           end_date_.toString() + ',' +
+           std::to_string(id_) + ',' +
+           std::to_string(owner_->id_) + ',' +
+           std::to_string(renter_->id_);
 }
