@@ -4,12 +4,10 @@
 #include <string>
 
 #include "Date.h"
-#include "Member.h"
+#include "Entity.h"
 
 class Motorbike : public Entity
 {
-
-protected:
     std::string model_;
     std::string color_;
     std::string engine_size_;
@@ -17,33 +15,32 @@ protected:
     unsigned int year_made_;
     std::string description_;
 
-    double rating_;
+    double rating_{0.0};
     double required_rating_;
     unsigned int point_consume_;
     std::string location_;
     Date start_date_;
     Date end_date_;
 
-    Member *owner_;
-    Member *renter_;
+    unsigned int owner_id_;
+    unsigned int renter_id_;
 
 public:
     Motorbike(
+        unsigned int id,
         std::string model,
         std::string color,
-        int engineSize,
-        std::string transmissionMode,
-        int yearMade,
+        std::string engine_size,
+        std::string transmission_mode,
+        unsigned int year_made_,
         std::string description,
-        double requiredRating,
-        int consumingPoint,
+        double required_rating,
+        unsigned int point_consume,
         std::string location,
-        Date startdate,
-        Date enddate,
-        int ownerID,
-        int motorbikeID,
-        double motorbikeRating,
-        int renterID);
+        Date start_date,
+        Date end_date,
+        unsigned int owner_id,
+        unsigned int renter_id);
 
     std::string toString() override;
 
