@@ -7,6 +7,9 @@ public:
     unsigned int id_;
 
     Entity(unsigned int id);
+
+    virtual std::string toString();
+    virtual std::string serialize();
 };
 
 #endif

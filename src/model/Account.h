@@ -14,8 +14,8 @@ protected:
 public:
     Account(unsigned int id, std::string username, std::string password);
 
-    virtual std::string toString();
-    virtual std::string serialize();
+    std::string toString() override;
+    std::string serialize() override;
 
     friend class System;
 };
