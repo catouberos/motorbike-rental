@@ -1,33 +1,24 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <fstream>
-#ifndef DATE_H
-#define DATE_H
+#ifndef DATE_H_
+#define DATE_H_
+
 class Date
 {
-    int m_day{};
-    int m_month{};
-    int m_year{};
+    unsigned int year_;
+    unsigned int month_;
+    unsigned int day_;
 
 public:
-    Date() = default;
-    Date(int dd, int mm, int yyyy) :m_day{dd}, m_month{mm}, m_year{yyyy}{}
+    Date(unsigned int year, unsigned int month, unsigned int day);
 
-    friend class Motorbike;
-    
-    friend bool operator==(Date& d1, Date& d2);
+    bool operator==(Date &d);
 
-    void printDate();
+    bool operator<(Date &d);
 
-    friend bool operator< (Date& d1, Date& d2);
+    bool operator>(Date &d);
 
+    bool operator<=(Date &d);
 
-    friend bool operator> (Date& d1, Date& d2);
-
-    friend bool operator<= (Date& d1, Date& d2);
-
-    friend bool operator>= (Date& d1, Date& d2);
-
+    bool operator>=(Date &d);
 };
+
 #endif

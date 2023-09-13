@@ -1,43 +1,43 @@
 #include "Date.h"
 
-bool operator==(Date& d1, Date& d2)
+Date::Date(unsigned int year, unsigned int month, unsigned int day) : year_(year), month_(month), day_(day) {}
+
+bool Date::operator==(Date &d)
 {
-    return (d1.m_day == d2.m_day && d1.m_month == d2.m_month && d1.m_year == d2.m_year);
+    return (day_ == d.day_ && month_ == d.month_ && year_ == d.year_);
 }
 
-void Date::printDate()
+bool Date::operator<(Date &d)
 {
-    std::cout << m_day << "/" << m_month << '/' << m_year;
-}
+    if (year_ < d.year_)
+    {
+        return true;
+    }
 
-bool operator< (Date& d1, Date& d2)
-{
-    if(d1.m_year < d2.m_year)
+    if (year_ == d.year_ && month_ < d.month_)
     {
         return true;
     }
-    else if(d1.m_year == d2.m_year && d1.m_month < d2.m_month)
+
+    if (year_ == d.year_ && month_ == d.month_ && day_ < d.day_)
     {
         return true;
     }
-    else if(d1.m_year == d2.m_year && d1.m_month == d2.m_month && d1.m_day <d2.m_day)
-    {
-        return true;
-    }
+
     return false;
 }
 
-bool operator> (Date& d1, Date& d2)
+bool Date::operator>(Date &d)
 {
-    return operator<(d2, d1);
+    return d < *this;
 }
 
-bool operator<= (Date& d1, Date& d2)
+bool Date::operator<=(Date &d)
 {
-    return !operator>(d1, d2);
+    return !(*this > d);
 }
 
-bool operator>= (Date& d1, Date& d2)
+bool Date::operator>=(Date &d)
 {
-    return !operator<(d1, d2);
+    return !(*this < d);
 }
