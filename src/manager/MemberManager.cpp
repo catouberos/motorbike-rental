@@ -18,8 +18,15 @@ unsigned int MemberManager::getUnusedId() {
     return members_.size() + 1;
 }
 
-Member MemberManager::registerMember(std::string username, std::string password) {
-    Member member(getUnusedId(), username, password);    
+Member MemberManager::registerMember(std::string username, std::string password,
+        std::string full_name,
+        std::string phone_number,
+        std::string id_type,
+        std::string id_number,
+        std::string license_number,
+        std::string expiry_date
+        ) {
+    Member member(getUnusedId(), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, 20, 0, 0);
 
     members_.push_back(member);
 
