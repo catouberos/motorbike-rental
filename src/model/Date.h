@@ -10,6 +10,9 @@ class Date
     unsigned int day_;
 
 public:
+    // default date constructor, default to 0000/00/00
+    Date();
+
     Date(std::string date);
 
     Date(unsigned int year, unsigned int month, unsigned int day);

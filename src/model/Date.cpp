@@ -3,6 +3,8 @@
 
 #include "Date.h"
 
+Date::Date() : year_(0), month_(0), day_(0) {}
+
 Date::Date(std::string date)
 {
     // assume the input is always correct, parse as yyyy/mm/dd
