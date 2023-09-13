@@ -10,11 +10,24 @@ class MemberManager
     std::vector<Member> members_;
 
 public:
-    MemberManager(std::vector<Member> members);
+    MemberManager();
+
+    bool add(Member member);
 
     std::vector<Member> getMembers();
 
-    bool registerMember();
+    unsigned int getUnusedId();
+
+    Member registerMember(std::string username, std::string password);
+
+    // load from file
+    bool init();
+
+    // populate the pointers
+    bool load();
+
+    // save to file
+    bool save();
 };
 
 #endif

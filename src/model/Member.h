@@ -4,11 +4,9 @@
 #include <string>
 
 #include "Account.h"
-#include "Motorbike.h"
 
 class Member : public Account
 {
-protected:
     std::string full_name_;
     std::string phone_number_;
     std::string id_type_;
@@ -16,11 +14,12 @@ protected:
     std::string license_number_;
     std::string expiry_date_;
 
-    unsigned int credit_point_;
-    double renter_rating_;
+    double rating_;
 
-    Motorbike *owned_motorbike_;
-    Motorbike *rented_motorbike_;
+    unsigned int credit_point_;
+
+    unsigned int owned_motorbike_id_;
+    unsigned int rented_motorbike_id_;
 
 public:
     Member(unsigned int id, std::string username, std::string password);
@@ -32,12 +31,15 @@ public:
            std::string id_type,
            std::string id_number,
            std::string license_number,
-           std::string expiry_date);
+           std::string expiry_date,
+           unsigned int credit_point,
+           unsigned int owned_motorbike_id,
+           unsigned int rented_motorbike_id);
 
     std::string toString() override;
     std::string serialize() override;
 
-    friend class System;
+    friend class Motorbike;
 };
 
 #endif
