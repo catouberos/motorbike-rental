@@ -58,16 +58,16 @@ std::string Motorbike::serialize()
     return std::to_string(id_) + ',' +
            model_ + ',' +
            color_ + ',' +
-           transmission_mode_ + ',' +
-           description_ + ',' +
-           location_ + ',' +
            engine_size_ + ',' +
+           transmission_mode_ + ',' +
            std::to_string(year_made_) + ',' +
-           std::to_string(rating_) + ',' +
+           description_ + ',' +
            std::to_string(required_rating_) + ',' +
            std::to_string(point_consume_) + ',' +
+           location_ + ',' +
            start_date_.toString() + ',' +
            end_date_.toString() + ',' +
            std::to_string(owner_id_) + ',' +
            std::to_string(renter_id_);
 }
+

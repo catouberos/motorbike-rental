@@ -52,5 +52,5 @@ std::string Member::serialize()
            expiry_date_ + ',' +
            std::to_string(credit_point_) + ',' +
            std::to_string(owned_motorbike_id_) + ',' +
-           std::to_string(rented_motorbike_id_) + ',';
+           std::to_string(rented_motorbike_id_);
 }

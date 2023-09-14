@@ -32,9 +32,6 @@ public:
     // load from file
     bool init();
 
-    // populate the pointers
-    bool load();
-
     // save to file
     bool save();
 };

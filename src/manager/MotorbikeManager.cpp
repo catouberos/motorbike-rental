@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fstream>
 
 #include "MotorbikeManager.h"
@@ -88,6 +89,26 @@ bool MotorbikeManager::init() {
         Motorbike motorbike(std::stoi(id), model, color, engine_size, transmission_mode, std::stoi(year_made), description, std::stod(required_rating), std::stoi(point_consume), location, Date(available_from), Date(available_to), std::stoi(owner_id), std::stoi(renter_id));
 
         add(motorbike);
+    }
+
+    file.close();
+
+    return true;
+}
+
+bool MotorbikeManager::save() {
+    std::ofstream file;
+
+    file.open("motorbike.dat", std::ios::out);
+    
+    if (!file)
+    {
+        return false;
+    }
+
+    for (Motorbike motorbike : motorbikes_) 
+    {
+        file << motorbike.serialize() << std::endl;
     }
 
     file.close();

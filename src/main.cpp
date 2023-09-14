@@ -1,6 +1,14 @@
+#include <ostream>
 #include <string>
 #include <vector>
 #include <fstream>
+
+#include "./utils/Utils.h"
+
+#include "./prompt/Prompt.h"
+
+#include "./manager/MemberManager.h"
+#include "./manager/MotorbikeManager.h"
 
 #include "./model/Date.h"
 #include "./model/Motorbike.h"
@@ -10,6 +18,103 @@
 
 int main()
 {
+    MemberManager memberManager;
+    MotorbikeManager motorbikeManager;
+
+    // load the member
+    memberManager.init();
+    motorbikeManager.init();
+
+        unsigned int mainChoice;
+
+    do {
+
+        // clear the console
+        Utils::clrscr();
+
+        // welcome screen
+        std::cout << "EEET2482 ASSIGNMENT" << std::endl
+                  << "MOTORBIKE RENTAL APPLICATION" << std::endl
+                  << std::endl
+                  << "Instructor: Dr. Ling Huo Chong" << std::endl
+                  << "Group: Group 18" << std::endl
+                  << "s3978796, Do Khoa Nguyen" << std::endl
+                  << "s3979562, Tran The Quang Minh" << std::endl
+                  << "s3958668, Bui Sy Quang" << std::endl
+                  << "s3854233, Hoang Minh Khoi" << std::endl
+                  << std::endl;
+
+        // prompt the user to login
+        std::cout << "Use the app as: [1] Guest, [2] Member, [3] Admin" << std::endl 
+                  << std::endl;
+        std::cout << "Enter your choice: ";
+        std::cin >> mainChoice;
+
+        switch (mainChoice)
+        {
+            case(0):
+            {
+                break;
+            }
+            case(1):
+            {
+                unsigned int guestChoice;
+
+                do
+                {
+                Utils::clrscr();
+
+                std::cout << "***USING AS A GUEST USER***" << std::endl;
+                    std::cout << "Dashboard" << std::endl
+                              << "[0] Exit" << std::endl
+                              << "[1] Register" << std::endl
+                              << "[2] View all motorbikes" << std::endl
+                              << std::endl
+                              << "Enter your choice: ";
+                    std::cin >> guestChoice;
+                    std::cin.ignore();
+
+                    switch (guestChoice)
+                    {
+                    case 0:
+                    {
+                        break;
+                    }
+                    case 1:
+                    {
+                        Prompt::registerMember(memberManager);
+                        break;
+                    }
+                    case 2:
+                    {
+                        Prompt::guestViewMotorbikes(motorbikeManager);
+                        break;
+                    }
+                    default:
+                    {
+                        std::cout << "***Invalid choice!***\n";
+                        break;
+                        ;
+                    }
+                    }
+                } while (guestChoice != 0);
+                break;
+         
+            }
+            case(2):
+            {
+                Utils::clrscr();
+                Prompt::registerMember(memberManager);
+                break;
+            }
+        }
+    } while (mainChoice != 0);
+
+    memberManager.save();
+    motorbikeManager.save();
+
+    return 0;
+/*    
     System rentalShop{};
     if (
         rentalShop.reloadDataMember() == false ||
@@ -264,6 +369,7 @@ int main()
     rentalShop.saveRenterRating();
     rentalShop.saveMotorRating();
     rentalShop.saveRequest();
+    */
 }
 
 // int main()

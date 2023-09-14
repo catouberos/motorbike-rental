@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fstream>
 
 #include "MemberManager.h"
@@ -81,11 +82,31 @@ bool MemberManager::init() {
         std::getline(file, expiry_date, ',');
         std::getline(file, credit_point, ',');
         std::getline(file, owned_motorbike_id, ',');
-        std::getline(file, rented_motorbike_id, ',');
+        std::getline(file, rented_motorbike_id, '\n');
 
         Member member(std::stoi(id), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, std::stoi(credit_point), std::stoi(owned_motorbike_id), std::stoi(rented_motorbike_id));
 
         add(member);
+    }
+
+    file.close();
+
+    return true;
+}
+
+bool MemberManager::save() {
+    std::ofstream file;
+
+    file.open("customer.dat", std::ios::out);
+
+    if (!file)
+    {
+        return false;
+    }
+
+    for (Member member : members_)
+    {
+        file << member.serialize() << std::endl;
     }
 
     file.close();
