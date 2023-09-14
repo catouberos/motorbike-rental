@@ -12,19 +12,25 @@ class MemberManager
 public:
     MemberManager();
 
+    unsigned int current_member_id_;
+
     bool add(Member member);
 
     std::vector<Member> getMembers();
 
+    Member getMemberFromId(unsigned int id);
+
     unsigned int getUnusedId();
 
-    Member registerMember(std::string username, std::string password,
-                          std::string full_name,
-                          std::string phone_number,
-                          std::string id_type,
-                          std::string id_number,
-                          std::string license_number,
-                          std::string expiry_date);
+    bool registerMember(std::string username, std::string password,
+                        std::string full_name,
+                        std::string phone_number,
+                        std::string id_type,
+                        std::string id_number,
+                        std::string license_number,
+                        std::string expiry_date);
+
+    bool loginMember(std::string username, std::string password);
 
     // load from file
     bool init();

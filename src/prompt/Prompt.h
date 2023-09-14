@@ -7,7 +7,9 @@
 class Prompt
 {
 public:
-    static void registerMember(MemberManager &memberManager);
+    static void welcomeScreen();
+    static bool loginMember(MemberManager &memberManager);
+    static bool registerMember(MemberManager &memberManager);
     static void guestViewMotorbikes(MotorbikeManager &motorbikeManager);
 };
 

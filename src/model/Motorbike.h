@@ -45,6 +45,8 @@ public:
     std::string toString() override;
 
     std::string serialize() override;
+
+    friend class MotorbikeManager;
 };
 
 #endif

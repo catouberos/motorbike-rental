@@ -17,24 +17,68 @@ std::vector<Member> MemberManager::getMembers()
     return members_;
 }
 
+Member MemberManager::getMemberFromId(unsigned int id)
+{
+    for (Member member : members_)
+    {
+        if (id == member.id_)
+        {
+            return member;
+        }
+    }
+
+    throw 404;
+}
+
 unsigned int MemberManager::getUnusedId()
 {
     return members_.size() + 1;
 }
 
-Member MemberManager::registerMember(std::string username, std::string password,
-                                     std::string full_name,
-                                     std::string phone_number,
-                                     std::string id_type,
-                                     std::string id_number,
-                                     std::string license_number,
-                                     std::string expiry_date)
+bool MemberManager::loginMember(std::string username, std::string password)
 {
+    bool match = false;
+
+    for (Member member : members_)
+    {
+        if (username == member.username_)
+        {
+            if (password == member.password_)
+            {
+                current_member_id_ = member.id_;
+                return true;
+            }
+            else
+            {
+                throw 401;
+            }
+        }
+    }
+
+    throw 404;
+}
+
+bool MemberManager::registerMember(std::string username, std::string password,
+                                   std::string full_name,
+                                   std::string phone_number,
+                                   std::string id_type,
+                                   std::string id_number,
+                                   std::string license_number,
+                                   std::string expiry_date)
+{
+    for (Member member : members_)
+    {
+        if (username == member.username_)
+        {
+            throw 409;
+        }
+    }
+
     Member member(getUnusedId(), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, 20, 0, 0);
 
     members_.push_back(member);
 
-    return member;
+    return true;
 }
 
 // very likely to break if is not serialize properly
