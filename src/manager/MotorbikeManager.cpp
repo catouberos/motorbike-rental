@@ -3,32 +3,36 @@
 
 #include "MotorbikeManager.h"
 
-MotorbikeManager::MotorbikeManager() {};
+MotorbikeManager::MotorbikeManager(){};
 
-bool MotorbikeManager::add(Motorbike motorbike) {
+bool MotorbikeManager::add(Motorbike motorbike)
+{
     motorbikes_.push_back(motorbike);
 
     return true;
 }
 
-std::vector<Motorbike> MotorbikeManager::getMotorbikes() {
+std::vector<Motorbike> MotorbikeManager::getMotorbikes()
+{
     return motorbikes_;
 }
 
-unsigned int MotorbikeManager::getUnusedId() {
+unsigned int MotorbikeManager::getUnusedId()
+{
     return motorbikes_.size() + 1;
 }
 
 Motorbike MotorbikeManager::registerMotorbike(
-        std::string model,
-        std::string color,
-        std::string engine_size,
-        std::string transmission_mode,
-        unsigned int year_made_,
-        std::string description,
-        double required_rating,
-        unsigned int point_consume,
-        std::string location) {
+    std::string model,
+    std::string color,
+    std::string engine_size,
+    std::string transmission_mode,
+    unsigned int year_made_,
+    std::string description,
+    double required_rating,
+    unsigned int point_consume,
+    std::string location)
+{
     Motorbike motorbike(getUnusedId(), model, color, engine_size, transmission_mode, year_made_, description, required_rating, point_consume, location, Date(), Date(), 0, 0);
 
     motorbikes_.push_back(motorbike);
@@ -37,9 +41,11 @@ Motorbike MotorbikeManager::registerMotorbike(
 }
 
 // very likely to break if is not serialize properly
-bool MotorbikeManager::init() {
+bool MotorbikeManager::init()
+{
     // check: only allow loading when initialize, where member list is empty
-    if (motorbikes_.size() > 0) {
+    if (motorbikes_.size() > 0)
+    {
         return false;
     }
 
@@ -96,17 +102,18 @@ bool MotorbikeManager::init() {
     return true;
 }
 
-bool MotorbikeManager::save() {
+bool MotorbikeManager::save()
+{
     std::ofstream file;
 
     file.open("motorbike.dat", std::ios::out);
-    
+
     if (!file)
     {
         return false;
     }
 
-    for (Motorbike motorbike : motorbikes_) 
+    for (Motorbike motorbike : motorbikes_)
     {
         file << motorbike.serialize() << std::endl;
     }

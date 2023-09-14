@@ -3,30 +3,33 @@
 
 #include "MemberManager.h"
 
-MemberManager::MemberManager() {};
+MemberManager::MemberManager(){};
 
-bool MemberManager::add(Member member) {
+bool MemberManager::add(Member member)
+{
     members_.push_back(member);
 
     return true;
 }
 
-std::vector<Member> MemberManager::getMembers() {
+std::vector<Member> MemberManager::getMembers()
+{
     return members_;
 }
 
-unsigned int MemberManager::getUnusedId() {
+unsigned int MemberManager::getUnusedId()
+{
     return members_.size() + 1;
 }
 
 Member MemberManager::registerMember(std::string username, std::string password,
-        std::string full_name,
-        std::string phone_number,
-        std::string id_type,
-        std::string id_number,
-        std::string license_number,
-        std::string expiry_date
-        ) {
+                                     std::string full_name,
+                                     std::string phone_number,
+                                     std::string id_type,
+                                     std::string id_number,
+                                     std::string license_number,
+                                     std::string expiry_date)
+{
     Member member(getUnusedId(), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, 20, 0, 0);
 
     members_.push_back(member);
@@ -35,9 +38,11 @@ Member MemberManager::registerMember(std::string username, std::string password,
 }
 
 // very likely to break if is not serialize properly
-bool MemberManager::init() {
+bool MemberManager::init()
+{
     // check: only allow loading when initialize, where member list is empty
-    if (members_.size() > 0) {
+    if (members_.size() > 0)
+    {
         return false;
     }
 
@@ -94,7 +99,8 @@ bool MemberManager::init() {
     return true;
 }
 
-bool MemberManager::save() {
+bool MemberManager::save()
+{
     std::ofstream file;
 
     file.open("customer.dat", std::ios::out);

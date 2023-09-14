@@ -20,9 +20,9 @@ Member::Member(unsigned int id,
                unsigned int rented_motorbike_id)
     : Account(id, username, password), full_name_(full_name),
       phone_number_(phone_number), id_type_(id_type), id_number_(id_number),
-      license_number_(license_number), expiry_date_(expiry_date), 
+      license_number_(license_number), expiry_date_(expiry_date),
       credit_point_(credit_point), owned_motorbike_id_(owned_motorbike_id),
-      rented_motorbike_id_(rented_motorbike_id) {};
+      rented_motorbike_id_(rented_motorbike_id){};
 
 std::string Member::toString()
 {
@@ -41,7 +41,7 @@ std::string Member::toString()
 
 std::string Member::serialize()
 {
-    return std::to_string(id_) + ',' + 
+    return std::to_string(id_) + ',' +
            username_ + ',' +
            password_ + ',' +
            full_name_ + ',' +
