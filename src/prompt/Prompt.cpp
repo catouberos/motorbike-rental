@@ -3,6 +3,9 @@
 #include "Prompt.h"
 #include "../utils/Utils.h"
 
+const std::string Prompt::admin_username_ = "admin";
+const std::string Prompt::admin_password_ = "admin";
+
 void Prompt::welcomeScreen()
 {
     // welcome screen
@@ -163,3 +166,40 @@ void Prompt::guestViewMotorbikes(MotorbikeManager &motorbikeManager)
     std::cout << "Press any key to exit" << std::endl;
     std::cin.ignore();
 }
+
+bool Prompt::loginAdmin()
+{
+    do
+    {
+        Utils::clrscr();
+
+        std::string username;
+        std::cout << "Enter your username: ";
+        std::getline(std::cin.ignore(), username);
+
+        std::string password;
+        std::cout << "Enter your password: ";
+        std::getline(std::cin, password);
+
+        if (username == admin_username_ && password == admin_password_)
+        {
+            std::cout << "Login successful" << std::endl;
+            return true;
+        }
+        else
+        {
+            char prompt;
+
+            std::cout << "Wrong username or password" << std::endl;
+
+            std::cout << "Try again? (Y/n) ";
+            std::cin >> prompt;
+
+            if (prompt == 'n')
+            {
+                return false;
+            }
+        }
+    } while (true);
+}
+
