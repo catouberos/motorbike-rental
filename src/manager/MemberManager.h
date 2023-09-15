@@ -7,18 +7,20 @@
 
 class MemberManager
 {
-    std::vector<Member> members_;
+    std::vector<Member *> members_;
 
 public:
     MemberManager();
 
+    ~MemberManager();
+
     unsigned int current_member_id_;
 
-    bool add(Member member);
+    bool add(Member *member);
 
-    std::vector<Member> getMembers();
+    std::vector<Member *> getMembers();
 
-    Member getMemberFromId(unsigned int id);
+    Member* getMemberFromId(unsigned int id);
 
     unsigned int getUnusedId();
 

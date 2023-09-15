@@ -5,14 +5,20 @@
 
 MotorbikeManager::MotorbikeManager(){};
 
-bool MotorbikeManager::add(Motorbike motorbike)
+MotorbikeManager::~MotorbikeManager() {
+    for (Motorbike *motorbike : motorbikes_) {
+        delete[] motorbike;
+    }
+}
+
+bool MotorbikeManager::add(Motorbike *motorbike)
 {
     motorbikes_.push_back(motorbike);
 
     return true;
 }
 
-std::vector<Motorbike> MotorbikeManager::getMotorbikes()
+std::vector<Motorbike *> MotorbikeManager::getMotorbikes()
 {
     return motorbikes_;
 }
@@ -22,7 +28,7 @@ unsigned int MotorbikeManager::getUnusedId()
     return motorbikes_.size() + 1;
 }
 
-Motorbike MotorbikeManager::registerMotorbike(
+Motorbike* MotorbikeManager::registerMotorbike(
     std::string model,
     std::string color,
     std::string engine_size,
@@ -33,7 +39,7 @@ Motorbike MotorbikeManager::registerMotorbike(
     unsigned int point_consume,
     std::string location)
 {
-    Motorbike motorbike(getUnusedId(), model, color, engine_size, transmission_mode, year_made_, description, required_rating, point_consume, location, Date(), Date(), 0, 0);
+    Motorbike *motorbike = new Motorbike(getUnusedId(), model, color, engine_size, transmission_mode, year_made_, description, required_rating, point_consume, location, Date(), Date(), 0, 0);
 
     motorbikes_.push_back(motorbike);
 
@@ -92,7 +98,7 @@ bool MotorbikeManager::init()
         std::getline(file, owner_id, ',');
         std::getline(file, renter_id, '\n');
 
-        Motorbike motorbike(std::stoi(id), model, color, engine_size, transmission_mode, std::stoi(year_made), description, std::stod(required_rating), std::stoi(point_consume), location, Date(available_from), Date(available_to), std::stoi(owner_id), std::stoi(renter_id));
+        Motorbike* motorbike = new Motorbike(std::stoi(id), model, color, engine_size, transmission_mode, std::stoi(year_made), description, std::stod(required_rating), std::stoi(point_consume), location, Date(available_from), Date(available_to), std::stoi(owner_id), std::stoi(renter_id));
 
         add(motorbike);
     }
@@ -113,9 +119,9 @@ bool MotorbikeManager::save()
         return false;
     }
 
-    for (Motorbike motorbike : motorbikes_)
+    for (Motorbike *motorbike : motorbikes_)
     {
-        file << motorbike.serialize() << std::endl;
+        file << motorbike->serialize() << std::endl;
     }
 
     file.close();

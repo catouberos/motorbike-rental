@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Account.h"
+#include "Motorbike.h"
 
 class Member : public Account
 {
@@ -18,8 +19,8 @@ class Member : public Account
 
     unsigned int credit_point_;
 
-    unsigned int owned_motorbike_id_;
-    unsigned int rented_motorbike_id_;
+    Motorbike owned_motorbike_;
+    Motorbike *rented_motorbike_;
 
 public:
     Member(unsigned int id,

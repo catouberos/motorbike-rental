@@ -7,18 +7,20 @@
 
 class MotorbikeManager
 {
-    std::vector<Motorbike> motorbikes_;
+    std::vector<Motorbike *> motorbikes_;
 
 public:
     MotorbikeManager();
 
-    bool add(Motorbike motorbike);
+    ~MotorbikeManager();
 
-    std::vector<Motorbike> getMotorbikes();
+    bool add(Motorbike *motorbike);
+
+    std::vector<Motorbike *> getMotorbikes();
 
     unsigned int getUnusedId();
 
-    Motorbike registerMotorbike(
+    Motorbike* registerMotorbike(
         std::string model,
         std::string color,
         std::string engine_size,

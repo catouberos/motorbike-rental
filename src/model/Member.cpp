@@ -53,6 +53,6 @@ std::string Member::serialize()
            license_number_ + ',' +
            expiry_date_ + ',' +
            std::to_string(credit_point_) + ',' +
-           std::to_string(owned_motorbike_id_) + ',' +
-           std::to_string(rented_motorbike_id_);
+           std::to_string(owned_motorbike_.id_) + ',' +
+           std::to_string(rented_motorbike_->id_);
 }

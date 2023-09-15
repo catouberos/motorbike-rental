@@ -5,23 +5,29 @@
 
 MemberManager::MemberManager() : current_member_id_(0){};
 
-bool MemberManager::add(Member member)
+MemberManager::~MemberManager() {
+    for (Member *member : members_) {
+        delete[] member;
+    }
+}
+
+bool MemberManager::add(Member *member)
 {
     members_.push_back(member);
 
     return true;
 }
 
-std::vector<Member> MemberManager::getMembers()
+std::vector<Member *> MemberManager::getMembers()
 {
     return members_;
 }
 
-Member MemberManager::getMemberFromId(unsigned int id)
+Member * MemberManager::getMemberFromId(unsigned int id)
 {
-    for (Member member : members_)
+    for (Member *member : members_)
     {
-        if (id == member.id_)
+        if (id == member->id_)
         {
             return member;
         }
@@ -39,13 +45,13 @@ bool MemberManager::loginMember(std::string username, std::string password)
 {
     bool match = false;
 
-    for (Member member : members_)
+    for (Member *member : members_)
     {
-        if (username == member.username_)
+        if (username == member->username_)
         {
-            if (password == member.password_)
+            if (password == member->password_)
             {
-                current_member_id_ = member.id_;
+                current_member_id_ = member->id_;
                 return true;
             }
             else
@@ -66,15 +72,15 @@ bool MemberManager::registerMember(std::string username, std::string password,
                                    std::string license_number,
                                    std::string expiry_date)
 {
-    for (Member member : members_)
+    for (Member *member : members_)
     {
-        if (username == member.username_)
+        if (username == member->username_)
         {
             throw 409;
         }
     }
 
-    Member member(getUnusedId(), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, 20, 0, 0);
+    Member *member = new Member(getUnusedId(), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, 20, 0, 0);
 
     members_.push_back(member);
 
@@ -140,7 +146,7 @@ bool MemberManager::init()
         std::getline(file, owned_motorbike_id, ',');
         std::getline(file, rented_motorbike_id, '\n');
 
-        Member member(std::stoi(id), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, std::stoi(credit_point), std::stoi(owned_motorbike_id), std::stoi(rented_motorbike_id));
+        Member *member = new Member(std::stoi(id), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, std::stoi(credit_point), std::stoi(owned_motorbike_id), std::stoi(rented_motorbike_id));
 
         add(member);
     }
@@ -161,9 +167,9 @@ bool MemberManager::save()
         return false;
     }
 
-    for (Member member : members_)
+    for (Member *member : members_)
     {
-        file << member.serialize() << std::endl;
+        file << member->serialize() << std::endl;
     }
 
     file.close();
