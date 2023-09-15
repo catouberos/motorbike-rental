@@ -22,7 +22,6 @@ class Member : public Account
     unsigned int rented_motorbike_id_;
 
 public:
-    Member(unsigned int id, std::string username, std::string password);
     Member(unsigned int id,
            std::string username,
            std::string password,
@@ -35,6 +34,8 @@ public:
            unsigned int credit_point,
            unsigned int owned_motorbike_id,
            unsigned int rented_motorbike_id);
+
+    std::string getFullName();
 
     std::string toString() override;
     std::string serialize() override;

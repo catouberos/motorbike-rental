@@ -3,9 +3,6 @@
 
 #include "Member.h"
 
-Member::Member(unsigned int id, std::string username, std::string password)
-    : Account(id, username, password) {}
-
 Member::Member(unsigned int id,
                std::string username,
                std::string password,
@@ -24,12 +21,17 @@ Member::Member(unsigned int id,
       credit_point_(credit_point), owned_motorbike_id_(owned_motorbike_id),
       rented_motorbike_id_(rented_motorbike_id){};
 
+std::string Member::getFullName()
+{
+    return full_name_;
+}
+
 std::string Member::toString()
 {
     std::ostringstream oss;
 
     oss << "Member ID: " << id_ << std::endl
-        << "fullname: " << full_name_ << std::endl
+        << "Full name: " << full_name_ << std::endl
         << "ID type: " << id_type_ << std::endl
         << "ID number: " << id_number_ << std::endl
         << "License number: " << license_number_ << std::endl

@@ -32,6 +32,8 @@ public:
 
     bool loginMember(std::string username, std::string password);
 
+    bool logoutMember();
+
     // load from file
     bool init();
 

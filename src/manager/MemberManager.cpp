@@ -3,7 +3,7 @@
 
 #include "MemberManager.h"
 
-MemberManager::MemberManager(){};
+MemberManager::MemberManager() : current_member_id_(0){};
 
 bool MemberManager::add(Member member)
 {
@@ -77,6 +77,13 @@ bool MemberManager::registerMember(std::string username, std::string password,
     Member member(getUnusedId(), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, 20, 0, 0);
 
     members_.push_back(member);
+
+    return true;
+}
+
+bool MemberManager::logoutMember()
+{
+    current_member_id_ = 0;
 
     return true;
 }
