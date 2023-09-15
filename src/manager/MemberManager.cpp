@@ -5,9 +5,11 @@
 
 MemberManager::MemberManager() : current_member_id_(0){};
 
-MemberManager::~MemberManager() {
-    for (Member *member : members_) {
-        delete[] member;
+MemberManager::~MemberManager()
+{
+    for (Member *member : members_)
+    {
+        delete member;
     }
 }
 
@@ -23,7 +25,7 @@ std::vector<Member *> MemberManager::getMembers()
     return members_;
 }
 
-Member * MemberManager::getMemberFromId(unsigned int id)
+Member *MemberManager::getMemberFromId(unsigned int id)
 {
     for (Member *member : members_)
     {
@@ -95,7 +97,7 @@ bool MemberManager::logoutMember()
 }
 
 // very likely to break if is not serialize properly
-bool MemberManager::init()
+bool MemberManager::init(MotorbikeManager &motorbikeManager)
 {
     // check: only allow loading when initialize, where member list is empty
     if (members_.size() > 0)
@@ -146,7 +148,10 @@ bool MemberManager::init()
         std::getline(file, owned_motorbike_id, ',');
         std::getline(file, rented_motorbike_id, '\n');
 
-        Member *member = new Member(std::stoi(id), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, std::stoi(credit_point), std::stoi(owned_motorbike_id), std::stoi(rented_motorbike_id));
+        Motorbike *owned_motorbike = motorbikeManager.getMotorbikeFromId(std::stoi(owned_motorbike_id));
+        Motorbike *rented_motorbike = motorbikeManager.getMotorbikeFromId(std::stoi(rented_motorbike_id));
+
+        Member *member = new Member(std::stoi(id), username, password, full_name, phone_number, id_type, id_number, license_number, expiry_date, std::stoi(credit_point), owned_motorbike, rented_motorbike);
 
         add(member);
     }

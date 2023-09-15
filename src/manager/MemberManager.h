@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../model/Member.h"
+#include "MotorbikeManager.h"
 
 class MemberManager
 {
@@ -20,7 +21,7 @@ public:
 
     std::vector<Member *> getMembers();
 
-    Member* getMemberFromId(unsigned int id);
+    Member *getMemberFromId(unsigned int id);
 
     unsigned int getUnusedId();
 
@@ -37,7 +38,7 @@ public:
     bool logoutMember();
 
     // load from file
-    bool init();
+    bool init(MotorbikeManager &motorbikeManager);
 
     // save to file
     bool save();

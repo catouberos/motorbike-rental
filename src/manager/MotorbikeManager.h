@@ -20,6 +20,8 @@ public:
 
     unsigned int getUnusedId();
 
+    Motorbike* getMotorbikeFromId(unsigned int id);
+
     Motorbike* registerMotorbike(
         std::string model,
         std::string color,

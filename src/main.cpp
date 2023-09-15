@@ -18,17 +18,18 @@
 
 int main()
 {
-    MemberManager memberManager;
     MotorbikeManager motorbikeManager;
+    MemberManager memberManager;
 
     // load the member
-    memberManager.init();
     motorbikeManager.init();
+    memberManager.init(motorbikeManager);
 
     unsigned int mainChoice;
 
     do
     {
+
         // clear the console
         Utils::clrscr();
 
@@ -46,7 +47,8 @@ int main()
         {
         case (0):
             break;
-        // guest application
+            // guest application
+
         case (1):
             unsigned int guestChoice;
 
@@ -93,6 +95,7 @@ int main()
                 }
             } while (guestChoice != 0);
             break;
+
         // member application
         case (2):
             Utils::clrscr();
@@ -108,7 +111,7 @@ int main()
                     std::cout << "EEET2482 ASSIGNMENT" << std::endl
                               << "MOTORBIKE RENTAL APPLICATION" << std::endl
                               << std::endl
-                              << "Welcome, " << memberManager.getMemberFromId(memberManager.current_member_id_).getFullName() << std::endl
+                              << "Welcome, " << memberManager.getMemberFromId(memberManager.current_member_id_)->getFullName() << std::endl
                               << "[1] View your information" << std::endl
                               << std::endl
                               << "[0] Exit" << std::endl
@@ -126,6 +129,7 @@ int main()
     motorbikeManager.save();
 
     return 0;
+
     /*        case 2:
             {
                 int userID{rentalShop.signIn()};

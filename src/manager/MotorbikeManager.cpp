@@ -5,9 +5,12 @@
 
 MotorbikeManager::MotorbikeManager(){};
 
-MotorbikeManager::~MotorbikeManager() {
-    for (Motorbike *motorbike : motorbikes_) {
-        delete[] motorbike;
+MotorbikeManager::~MotorbikeManager()
+{
+
+    for (Motorbike *motorbike : motorbikes_)
+    {
+        delete motorbike;
     }
 }
 
@@ -28,7 +31,20 @@ unsigned int MotorbikeManager::getUnusedId()
     return motorbikes_.size() + 1;
 }
 
-Motorbike* MotorbikeManager::registerMotorbike(
+Motorbike *MotorbikeManager::getMotorbikeFromId(unsigned int id)
+{
+    for (Motorbike *motorbike : motorbikes_)
+    {
+        if (id == motorbike->id_)
+        {
+            return motorbike;
+        }
+    }
+
+    return nullptr;
+}
+
+Motorbike *MotorbikeManager::registerMotorbike(
     std::string model,
     std::string color,
     std::string engine_size,
@@ -98,7 +114,7 @@ bool MotorbikeManager::init()
         std::getline(file, owner_id, ',');
         std::getline(file, renter_id, '\n');
 
-        Motorbike* motorbike = new Motorbike(std::stoi(id), model, color, engine_size, transmission_mode, std::stoi(year_made), description, std::stod(required_rating), std::stoi(point_consume), location, Date(available_from), Date(available_to), std::stoi(owner_id), std::stoi(renter_id));
+        Motorbike *motorbike = new Motorbike(std::stoi(id), model, color, engine_size, transmission_mode, std::stoi(year_made), description, std::stod(required_rating), std::stoi(point_consume), location, Date(available_from), Date(available_to), std::stoi(owner_id), std::stoi(renter_id));
 
         add(motorbike);
     }
@@ -110,6 +126,7 @@ bool MotorbikeManager::init()
 
 bool MotorbikeManager::save()
 {
+
     std::ofstream file;
 
     file.open("motorbike.dat", std::ios::out);

@@ -19,8 +19,8 @@ class Member : public Account
 
     unsigned int credit_point_;
 
-    Motorbike owned_motorbike_;
-    Motorbike *rented_motorbike_;
+    Motorbike *owned_motorbike_ = nullptr;
+    Motorbike *rented_motorbike_ = nullptr;
 
 public:
     Member(unsigned int id,
@@ -33,8 +33,8 @@ public:
            std::string license_number,
            std::string expiry_date,
            unsigned int credit_point,
-           unsigned int owned_motorbike_id,
-           unsigned int rented_motorbike_id);
+           Motorbike *owned_motorbike,
+           Motorbike *rented_motorbike);
 
     std::string getFullName();
 

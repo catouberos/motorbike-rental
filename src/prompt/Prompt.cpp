@@ -155,9 +155,9 @@ bool Prompt::registerMember(MemberManager &memberManager)
 
 void Prompt::guestViewMotorbikes(MotorbikeManager &motorbikeManager)
 {
-    for (Motorbike motorbike : motorbikeManager.getMotorbikes())
+    for (Motorbike *motorbike : motorbikeManager.getMotorbikes())
     {
-        std::cout << motorbike.toString() << std::endl;
+        std::cout << motorbike->toString() << std::endl;
     }
 
     std::cout << "Press any key to exit" << std::endl;

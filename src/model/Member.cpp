@@ -13,13 +13,13 @@ Member::Member(unsigned int id,
                std::string license_number,
                std::string expiry_date,
                unsigned int credit_point,
-               unsigned int owned_motorbike_id,
-               unsigned int rented_motorbike_id)
+               Motorbike *owned_motorbike,
+               Motorbike *rented_motorbike)
     : Account(id, username, password), full_name_(full_name),
       phone_number_(phone_number), id_type_(id_type), id_number_(id_number),
       license_number_(license_number), expiry_date_(expiry_date),
-      credit_point_(credit_point), owned_motorbike_id_(owned_motorbike_id),
-      rented_motorbike_id_(rented_motorbike_id){};
+      credit_point_(credit_point), owned_motorbike_(owned_motorbike),
+      rented_motorbike_(rented_motorbike){};
 
 std::string Member::getFullName()
 {
@@ -53,6 +53,6 @@ std::string Member::serialize()
            license_number_ + ',' +
            expiry_date_ + ',' +
            std::to_string(credit_point_) + ',' +
-           std::to_string(owned_motorbike_.id_) + ',' +
-           std::to_string(rented_motorbike_->id_);
+           (owned_motorbike_ != nullptr ? std::to_string(owned_motorbike_->id_) : "0") + ',' +
+           (rented_motorbike_ != nullptr ? std::to_string(rented_motorbike_->id_) : "0");
 }
