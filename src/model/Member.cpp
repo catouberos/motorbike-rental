@@ -26,6 +26,11 @@ std::string Member::getFullName()
     return full_name_;
 }
 
+Motorbike* Member::getRentedMotorbike()
+{
+    return rented_motorbike_;
+}
+
 std::string Member::toString()
 {
     std::ostringstream oss;

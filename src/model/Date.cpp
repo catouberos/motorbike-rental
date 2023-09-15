@@ -17,6 +17,11 @@ Date::Date(unsigned int year, unsigned int month, unsigned int day) : year_(year
 
 std::string Date::toString()
 {
+    return std::to_string(day_) + "/" + std::to_string(month_) + "/" + std::to_string(year_);
+}
+
+std::string Date::serialize()
+{
     std::ostringstream oss;
 
     // this will print as yyyy/mm/dd

@@ -19,6 +19,8 @@ public:
 
     std::string toString();
 
+    std::string serialize();
+
     bool operator==(Date &d);
 
     bool operator<(Date &d);

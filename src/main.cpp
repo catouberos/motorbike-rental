@@ -108,11 +108,21 @@ int main()
                 {
                     Utils::clrscr();
 
+                    Member *current_member = memberManager.getMemberFromId(memberManager.current_member_id_);
+                    Motorbike *current_rent = current_member->getRentedMotorbike();
+
                     std::cout << "EEET2482 ASSIGNMENT" << std::endl
                               << "MOTORBIKE RENTAL APPLICATION" << std::endl
                               << std::endl
-                              << "Welcome, " << memberManager.getMemberFromId(memberManager.current_member_id_)->getFullName() << std::endl
-                              << "[1] View your information" << std::endl
+                              << "Welcome, " << current_member->getFullName() << std::endl;
+
+                    if (current_rent != nullptr)
+                    {
+                        std::cout << "You are currently renting a bike from " << current_rent->getStartDate().toString() << " to " << current_rent->getEndDate().toString() << std::endl
+                                  << std::endl;
+                    }
+
+                    std::cout << "[1] View your information" << std::endl
                               << std::endl
                               << "[0] Exit" << std::endl
                               << std::endl
@@ -122,6 +132,37 @@ int main()
                 } while (userChoice != 0);
             }
             break;
+
+        // admin application
+        case (3):
+            Utils::clrscr();
+
+            if (Prompt::loginAdmin() == true)
+            {
+                int adminChoice;
+
+                do
+                {
+                    Utils::clrscr();
+
+                    std::cout << "EEET2482 ASSIGNMENT" << std::endl
+                              << "MOTORBIKE RENTAL APPLICATION" << std::endl
+                              << std::endl
+                              << "Welcome, admin." << std::endl
+                              << "[1] View all members" << std::endl
+                              << "[2] View all motorbikes" << std::endl
+                              << std::endl
+                              << "[0] Exit" << std::endl
+                              << std::endl
+                              << "Enter your choice: ";
+                    std::cin >> adminChoice;
+                    std::cin.ignore();
+                } while (adminChoice != 0);
+            }
+            break;
+
+        default:
+            break;
         }
     } while (mainChoice != 0);
 
@@ -129,6 +170,7 @@ int main()
     motorbikeManager.save();
 
     return 0;
+}
 
     /*        case 2:
             {
@@ -253,69 +295,6 @@ int main()
                 break;
             }
 
-            case 3:
-            {
-                if (!rentalShop.adminSignIn())
-                {
-                    break;
-                }
-                int menuChoice{};
-                do
-                {
-                    std::cout << "This is your menu:\n";
-                    std::cout << "0. Exit\n";
-                    std::cout << "1. View all member\n";
-                    std::cout << "2. View all motorbikes\n";
-                    std::cout << "Enter your choice: ";
-                    std::cin >> menuChoice;
-                    std::cin.ignore();
-
-                    switch (menuChoice)
-                    {
-                    case 0:
-                    {
-                        break;
-                    }
-                    case 1:
-                    {
-                        std::cout << "\n===MEMBER ADMIN LIST===\n";
-                        rentalShop.viewMemberListAdmin();
-                        std::cout << "===END SESSION===\n";
-                        break;
-                    }
-                    case 2:
-                    {
-                        std::cout << "\n===MOTORBIKE ADMIN LIST===\n";
-                        rentalShop.viewMotorListAdmin();
-                        std::cout << "===END SESSION===\n";
-                        break;
-                    }
-                    default:
-                    {
-                        std::cout << "***Invalid choice!***\n";
-                        break;
-                    }
-                    }
-                } while (menuChoice != 0);
-                break;
-            }
-
-            default:
-            {
-                std::cout << "***Invalid choice!***\n";
-                break;
-            }
-            }
-
-            std::cout << "\n\n===SAVING===\n\n";
-            rentalShop.saveMember();
-            rentalShop.saveMotorbike();
-            rentalShop.saveRenterRating();
-            rentalShop.saveMotorRating();
-            rentalShop.saveRequest();
-            */
-}
-
 // int main()
 // {
 //     System rentalShop{};
@@ -365,35 +344,4 @@ int main()
 
 //     // std::cout << rentalShop.signIn();
 // }
-
-// int main()
-// {
-//     std::cout << "Use the app as 1. Guest   2. Member   3. Admin\n\n";
-//     int choice{};
-//     std::cout << "Enter your choice: ";
-//     std::cin >> choice;
-//     std::cin.ignore();
-
-//     switch (choice)
-//     {
-//     case 1:
-//         std::cout << "This is your menu:\n";
-//         std::cout << "0. Exit\n";
-//         std::cout << "1. Register\n";
-//         std::cout << "2. View all motorbike details\n";
-//         std::cout << "1. Register\n";
-
-//         break;
-
-//     case 2:
-//         std::cout << "This is your menu:\n";
-//         std::cout << "0. Exit\n";
-//         std::cout << "1. Register\n";
-//         std::cout << "2. View all motorbike details\n";
-//         std::cout << "1. Register\n";
-
-//         break;
-//     default:
-//         break;
-//     }
-// }
+*/

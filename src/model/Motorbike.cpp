@@ -30,6 +30,14 @@ Motorbike::Motorbike(
                               owner_id_(owner_id),
                               renter_id_(renter_id){};
 
+Date Motorbike::getStartDate() {
+    return start_date_;
+}
+
+Date Motorbike::getEndDate() {
+    return end_date_;
+}
+
 std::string Motorbike::toString()
 {
     std::ostringstream oss;
@@ -65,8 +73,8 @@ std::string Motorbike::serialize()
            std::to_string(required_rating_) + ',' +
            std::to_string(point_consume_) + ',' +
            location_ + ',' +
-           start_date_.toString() + ',' +
-           end_date_.toString() + ',' +
+           start_date_.serialize() + ',' +
+           end_date_.serialize() + ',' +
            std::to_string(owner_id_) + ',' +
            std::to_string(renter_id_);
 }

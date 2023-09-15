@@ -37,6 +37,7 @@ public:
            Motorbike *rented_motorbike);
 
     std::string getFullName();
+    Motorbike* getRentedMotorbike();
 
     std::string toString() override;
     std::string serialize() override;
