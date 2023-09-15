@@ -14,4 +14,4 @@ jobs:
         uses: goto-bus-stop/setup-zig@v2
 
       - name: Build
-        run: zig c++ ./src/*.cpp
+        run: zig c++ ./src/**/*.cpp
