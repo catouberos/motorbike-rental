@@ -39,7 +39,7 @@ public:
     std::string getFullName();
     Motorbike* getRentedMotorbike();
 
-    std::string toString() override;
+    std::string toString(bool detailed = false) override;
     std::string serialize() override;
 
     friend class MemberManager;

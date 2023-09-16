@@ -38,25 +38,47 @@ Date Motorbike::getEndDate() {
     return end_date_;
 }
 
-std::string Motorbike::toString()
+std::string Motorbike::toString(bool detailed)
 {
     std::ostringstream oss;
 
-    oss << "Motorbike ID: " << id_ << std::endl
-        << "Owner ID: " << owner_id_ << std::endl
-        << "Renter ID: " << renter_id_ << std::endl
-        << "Model: " << model_ << std::endl
-        << "Color: " << color_ << std::endl
-        << "Engine size: " << engine_size_ << std::endl
-        << "Transmission mode: " << transmission_mode_ << std::endl
-        << "Year made: " << year_made_ << std::endl
-        << "Description: " << description_ << std::endl
-        << "Motorbike Rating: " << rating_ << std::endl
-        << "Required renter rating: " << required_rating_ << std::endl
-        << "Consuming point: " << point_consume_ << std::endl
-        << "Location: " << location_ << std::endl
-        << "Available from: " << start_date_.toString() << std::endl
-        << "Available to: " << end_date_.toString() << std::endl;
+    if (detailed) {
+        oss << "ID: " << id_ << std::endl
+            << "Owner ID: " << owner_id_ << std::endl
+            << "Model: " << model_ << std::endl
+            << "Color: " << color_ << std::endl
+            << "Engine size: " << engine_size_ << std::endl
+            << "Transmission mode: " << transmission_mode_ << std::endl
+            << "Year made: " << year_made_ << std::endl
+            << "Description: " << description_ << std::endl
+            << "Motorbike Rating: " << rating_ << std::endl
+            << "Required renter rating: " << required_rating_ << std::endl
+            << "Consuming point: " << point_consume_ << std::endl
+            << "Location: " << location_ << std::endl;
+        if (renter_id_ != 0) {
+            oss << "Renter ID: " << renter_id_ << std::endl
+                << "Rented from: " << start_date_.toString() << std::endl
+                << "Rented to: " << end_date_.toString() << std::endl;
+            }
+    } else {
+        oss << "ID: " << id_ << std::endl
+            << "Model: " << model_ << std::endl
+            << "Color: " << color_ << std::endl
+            << "Engine size: " << engine_size_ << std::endl
+            << "Transmission mode: " << transmission_mode_ << std::endl
+            << "Year made: " << year_made_ << std::endl
+            << "Description: " << description_ << std::endl
+            << "Motorbike Rating: " << rating_ << std::endl
+            << "Required renter rating: " << required_rating_ << std::endl
+            << "Consuming point: " << point_consume_ << std::endl
+            << "Location: " << location_ << std::endl;
+
+        if (renter_id_ != 0) {
+            oss << "Currently being rented by " << renter_id_ << std::endl;
+        } else {
+            oss << "Available for rent" << std::endl;
+        }
+    }
 
     return oss.str();
 }

@@ -45,7 +45,7 @@ public:
     Date getStartDate();
     Date getEndDate();
 
-    std::string toString() override;
+    std::string toString(bool detailed = false) override;
 
     std::string serialize() override;
 

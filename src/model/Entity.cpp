@@ -4,7 +4,7 @@
 
 Entity::Entity(unsigned int id) : id_(id) {}
 
-std::string Entity::toString()
+std::string Entity::toString(bool detailed)
 {
     return "Entity ID: " + std::to_string(id_);
 }
