@@ -23,6 +23,8 @@ public:
 
     bool operator==(Date &d);
 
+    bool operator!=(Date &d);
+
     bool operator<(Date &d);
 
     bool operator>(Date &d);

@@ -39,6 +39,11 @@ bool Date::operator==(Date &d)
     return (day_ == d.day_ && month_ == d.month_ && year_ == d.year_);
 }
 
+bool Date::operator!=(Date &d)
+{
+    return !(*this == d);
+}
+
 bool Date::operator<(Date &d)
 {
     if (year_ < d.year_)
