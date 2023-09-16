@@ -156,11 +156,14 @@ bool Prompt::registerMember(MemberManager &memberManager)
     return false;
 }
 
-void Prompt::guestViewMotorbikes(MotorbikeManager &motorbikeManager)
+void Prompt::guestViewMotorbikes(MotorbikeManager &motorbikeManager, MotorbikeRatingManager &motorbikeRatingManager)
 {
+    Utils::clrscr();
+
     for (Motorbike *motorbike : motorbikeManager.getMotorbikes())
     {
-        std::cout << motorbike->toString() << std::endl;
+        std::cout << motorbike->toString() << std::endl
+                  << "Average rating: " << motorbikeRatingManager.getAverageRating(motorbike->id_) << std::endl;
     }
 
     std::cout << "Press any key to exit" << std::endl;
@@ -203,3 +206,34 @@ bool Prompt::loginAdmin()
     } while (true);
 }
 
+void Prompt::adminViewMembers(MemberManager &memberManager, MemberRatingManager &memberRatingManager)
+{
+    Utils::clrscr();
+
+    for (Member *member : memberManager.getMembers())
+    {
+        std::cout << member->toString(true) << std::endl
+                  << "Average rating: " << memberRatingManager.getAverageRating(member->id_) << std::endl
+                  << std::endl
+                  << std::endl;
+    }
+
+    std::cout << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+}
+
+void Prompt::adminViewMotorbikes(MotorbikeManager &motorbikeManager, MotorbikeRatingManager &motorbikeRatingManager)
+{
+    Utils::clrscr();
+
+    for (Motorbike *motorbike : motorbikeManager.getMotorbikes())
+    {
+        std::cout << motorbike->toString(true) << std::endl
+                  << "Average rating: " << motorbikeRatingManager.getAverageRating(motorbike->id_) << std::endl
+                  << std::endl
+                  << std::endl;
+    }
+
+    std::cout << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+}

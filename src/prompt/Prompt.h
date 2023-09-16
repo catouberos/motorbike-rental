@@ -3,6 +3,8 @@
 
 #include "../manager/MemberManager.h"
 #include "../manager/MotorbikeManager.h"
+#include "../manager/MemberRatingManager.h"
+#include "../manager/MotorbikeRatingManager.h"
 
 class Prompt
 {
@@ -14,9 +16,11 @@ public:
     static bool loginMember(MemberManager &memberManager);
     static bool registerMember(MemberManager &memberManager);
 
-    static void guestViewMotorbikes(MotorbikeManager &motorbikeManager);
+    static void guestViewMotorbikes(MotorbikeManager &motorbikeManager, MotorbikeRatingManager &motorbikeRatingManager);
 
     static bool loginAdmin();
+    static void adminViewMembers(MemberManager &memberManager, MemberRatingManager &memberRatingManager);
+    static void adminViewMotorbikes(MotorbikeManager &motorbikeManager, MotorbikeRatingManager &motorbikeRatingManager);
 };
 
 #endif
