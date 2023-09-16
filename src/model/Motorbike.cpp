@@ -1,3 +1,4 @@
+#include <ostream>
 #include <string>
 #include <sstream>
 
@@ -38,6 +39,46 @@ Date Motorbike::getEndDate() {
     return end_date_;
 }
 
+unsigned int Motorbike::getRenterId() {
+    return renter_id_;
+}
+
+bool Motorbike::setList(Date start_date, Date end_date, unsigned int point_consume, double required_rating)
+{
+    start_date_ = start_date;
+    end_date_ = end_date;
+    point_consume_ = point_consume;
+    required_rating_ = required_rating;
+
+    return true;
+}
+
+bool Motorbike::setUnlist()
+{
+    if (renter_id_ == 0) {
+        throw 400;
+    }
+
+    start_date_ = Date(0, 0, 0);
+    end_date_ = Date(0, 0, 0);
+    point_consume_ = 0;
+    required_rating_ = 0;
+
+    return true;
+}
+
+unsigned int Motorbike::getPointConsumed() {
+    return point_consume_;
+}
+
+double Motorbike::getRequiredRating() {
+    return required_rating_;
+}
+
+std::string Motorbike::getLocation() {
+    return location_;
+}
+
 std::string Motorbike::toString(bool detailed)
 {
     std::ostringstream oss;
@@ -71,11 +112,12 @@ std::string Motorbike::toString(bool detailed)
             << "Motorbike Rating: " << rating_ << std::endl
             << "Required renter rating: " << required_rating_ << std::endl
             << "Consuming point: " << point_consume_ << std::endl
-            << "Location: " << location_ << std::endl;
+            << "Location: " << location_ << std::endl
+            << std::endl;
 
         if (renter_id_ != 0) {
             oss << "Currently being rented by " << renter_id_ << std::endl;
-        } else {
+        } else if (start_date_.getDay() != 0) {
             oss << "Available for rent" << std::endl;
         }
     }

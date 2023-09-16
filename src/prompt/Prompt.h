@@ -14,8 +14,14 @@ class Prompt
 public:
     static void welcomeScreen();
     static bool loginMember(MemberManager &memberManager);
-    static bool registerMember(MemberManager &memberManager);
+    static bool memberRegisterMotorbike(Member &member, MotorbikeManager &motorbikeManager);
+    static void memberViewDetails(Member &member);
+    static bool memberTopup(Member &currentMember);
+    static void memberViewAvailableMotorbikes(Member &member, MotorbikeManager &motorbikeManager, MemberRatingManager &memberRatingManager);
+    static void memberListMotorbike(Member &currentMember);
+    static void memberUnlistMotorbike(Member &currentMember);
 
+    static bool registerMember(MemberManager &memberManager);
     static void guestViewMotorbikes(MotorbikeManager &motorbikeManager, MotorbikeRatingManager &motorbikeRatingManager);
 
     static bool loginAdmin();

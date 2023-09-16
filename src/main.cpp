@@ -49,6 +49,7 @@ int main()
                   << std::endl
                   << "Enter your choice: ";
         std::cin >> mainChoice;
+        std::cin.ignore();
 
         switch (mainChoice)
         {
@@ -116,20 +117,38 @@ int main()
                     Utils::clrscr();
 
                     Member *current_member = memberManager.getMemberFromId(memberManager.current_member_id_);
-                    Motorbike *current_rent = current_member->getRentedMotorbike();
 
                     std::cout << "EEET2482 ASSIGNMENT" << std::endl
                               << "MOTORBIKE RENTAL APPLICATION" << std::endl
                               << std::endl
                               << "Welcome, " << current_member->getFullName() << std::endl;
 
-                    if (current_rent != nullptr)
+                    if (current_member->getRentedMotorbike() != nullptr)
                     {
-                        std::cout << "You are currently renting a bike from " << current_rent->getStartDate().toString() << " to " << current_rent->getEndDate().toString() << std::endl
+                        std::cout << "You are currently renting a bike from "
+                                  << current_member->getRentedMotorbike()->getStartDate().toString()
+                                  << " to "
+                                  << current_member->getRentedMotorbike()->getEndDate().toString() << std::endl
                                   << std::endl;
                     }
 
+                    if (current_member->getOwnedMotorbike() == nullptr)
+                    {
+                        std::cout << "You currently are not owning any motorbike, press [9] to register one." << std::endl;
+                    } else {
+                        if (current_member->getOwnedMotorbike()->getStartDate().getDay() == 0) {
+                            std::cout << "Your motorbike is currently unlisted, press [10] to list it." << std::endl;
+                        } else {
+                            std::cout << "Your motorbike is currently listed, press [10] to unlist it." << std::endl;
+                        }
+                    }
+                    
+                    std::cout << std::endl;
+
                     std::cout << "[1] View your information" << std::endl
+                              << "[2] Topup credits" << std::endl
+                              << std::endl
+                              << "[8] Get available motorbikes to rent" << std::endl
                               << std::endl
                               << "[0] Exit" << std::endl
                               << std::endl
@@ -140,6 +159,37 @@ int main()
                     switch (userChoice)
                     {
                     case 0:
+                        break;
+
+                    case 1:
+                        Prompt::memberViewDetails(*current_member);
+                        break;
+
+                    case 2:
+                        Prompt::memberTopup(*current_member);
+                        break;
+
+                    case 8:
+                        Prompt::memberViewAvailableMotorbikes(*current_member, motorbikeManager, memberRatingManager);
+                        break;
+
+                    case 9:
+                        if (current_member->getOwnedMotorbike() == nullptr) {
+                            Prompt::memberRegisterMotorbike(*current_member, motorbikeManager);
+                        }
+                        break;
+
+                    case 10:
+                        if (current_member->getOwnedMotorbike() != nullptr && current_member->getOwnedMotorbike()->getStartDate().getDay() == 0) {
+                            Prompt::memberListMotorbike(*current_member);
+                            break;
+                        }
+
+                        if (current_member->getOwnedMotorbike() != nullptr) {
+                            Prompt::memberUnlistMotorbike(*current_member);
+                            break;
+                        }
+
                         break;
                     }
                 } while (userChoice != 0);
@@ -214,15 +264,11 @@ int main()
             do
             {
                 std::cout << "This is your menu:\n";
-                std::cout << "0. Exit\n";
-                std::cout << "1. View information\n";
                 std::cout << "2. Rate the motorbike you are renting\n";
                 std::cout << "3. Rate current renter\n";
-                std::cout << "4. Search available motorbike\n";
                 std::cout << "5. Request motorbike\n";
                 std::cout << "6. View request list\n";
                 std::cout << "7. Accept request\n";
-                std::cout << "8. Top up credit point\n";
                 std::cout << "9. List motorbike\n";
                 std::cout << "10. Unlist motorbike\n";
                 std::cout << "11. Return motorbike\n";

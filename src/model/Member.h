@@ -36,8 +36,14 @@ public:
            Motorbike *owned_motorbike,
            Motorbike *rented_motorbike);
 
+    bool setOwnedMotorbike(Motorbike *motorbike);
+
     std::string getFullName();
-    Motorbike* getRentedMotorbike();
+    unsigned int getCreditPoint();
+    Motorbike *getOwnedMotorbike();
+    Motorbike *getRentedMotorbike();
+
+    bool topUp(unsigned int amount);
 
     std::string toString(bool detailed = false) override;
     std::string serialize() override;

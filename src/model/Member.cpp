@@ -21,49 +21,88 @@ Member::Member(unsigned int id,
       credit_point_(credit_point), owned_motorbike_(owned_motorbike),
       rented_motorbike_(rented_motorbike){};
 
+bool Member::setOwnedMotorbike(Motorbike *motorbike)
+{
+    if (motorbike == nullptr)
+    {
+        return false;
+    }
+
+    owned_motorbike_ = motorbike;
+    return true;
+}
+
 std::string Member::getFullName()
 {
     return full_name_;
 }
 
-Motorbike* Member::getRentedMotorbike()
+unsigned int Member::getCreditPoint()
+{
+    return credit_point_;
+}
+
+Motorbike *Member::getOwnedMotorbike()
+{
+    return owned_motorbike_;
+}
+
+Motorbike *Member::getRentedMotorbike()
 {
     return rented_motorbike_;
+}
+
+bool Member::topUp(unsigned int amount) {
+    if (amount < 0) {
+        return false;
+    }
+
+    credit_point_ += amount;
+    return true;
 }
 
 std::string Member::toString(bool detailed)
 {
     std::ostringstream oss;
 
-    if (detailed) {
-    oss << "ID: " << id_ << std::endl
-        << "Username: " << username_ << std::endl
-        << "Full name: " << full_name_ << std::endl
-        << "Phone number: " << phone_number_ << std::endl
-        << "ID type: " << id_type_ << std::endl
-        << "ID number: " << id_number_ << std::endl
-        << "License number: " << license_number_ << std::endl
-        << "Expiry date: " << expiry_date_ << std::endl
-        << "Credit point: " << credit_point_ << std::endl;
+    if (detailed)
+    {
+        oss << "ID: " << id_ << std::endl
+            << "Username: " << username_ << std::endl
+            << "Full name: " << full_name_ << std::endl
+            << "Phone number: " << phone_number_ << std::endl
+            << "ID type: " << id_type_ << std::endl
+            << "ID number: " << id_number_ << std::endl
+            << "License number: " << license_number_ << std::endl
+            << "Expiry date: " << expiry_date_ << std::endl
+            << "Credit point: " << credit_point_ << std::endl;
 
-        if (owned_motorbike_ != nullptr) {
-            oss << "Owned motorbike: " << std::endl 
+        if (owned_motorbike_ != nullptr)
+        {
+            oss << "Owned motorbike: " << std::endl
                 << owned_motorbike_->toString(detailed) << std::endl;
-        } else {
+        }
+        else
+        {
             oss << "Currently not owning any motorbike" << std::endl;
         }
 
-        if (rented_motorbike_ != nullptr) {
-            oss << "Rented motorbike: " << std::endl 
+        if (rented_motorbike_ != nullptr)
+        {
+            oss << "Rented motorbike: " << std::endl
                 << rented_motorbike_->toString(detailed) << std::endl;
-        } else {
+        }
+        else
+        {
             oss << "Currently not renting any motorbike" << std::endl;
         }
-    } else {
-    oss << "ID: " << id_ << std::endl
-        << "Username: " << username_ << std::endl
-        << "Full name: " << full_name_ << std::endl
-        << "Phone number: " << phone_number_ << std::endl;
+    }
+    else
+    {
+        oss << "ID: " << id_ << std::endl
+            << "Username: " << username_ << std::endl
+            << "Full name: " << full_name_ << std::endl
+            << "Phone number: " << phone_number_ << std::endl;
     }
 
     return oss.str();

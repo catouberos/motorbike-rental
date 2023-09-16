@@ -45,17 +45,18 @@ Motorbike *MotorbikeManager::getMotorbikeFromId(unsigned int id)
 }
 
 Motorbike *MotorbikeManager::registerMotorbike(
+    unsigned int owner_id,
     std::string model,
     std::string color,
     std::string engine_size,
     std::string transmission_mode,
-    unsigned int year_made_,
+    unsigned int year_made,
     std::string description,
     double required_rating,
     unsigned int point_consume,
     std::string location)
 {
-    Motorbike *motorbike = new Motorbike(getUnusedId(), model, color, engine_size, transmission_mode, year_made_, description, required_rating, point_consume, location, Date(), Date(), 0, 0);
+    Motorbike *motorbike = new Motorbike(getUnusedId(), model, color, engine_size, transmission_mode, year_made, description, required_rating, point_consume, location, Date(), Date(), owner_id, 0);
 
     motorbikes_.push_back(motorbike);
 

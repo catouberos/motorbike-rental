@@ -29,7 +29,7 @@ bool Prompt::loginMember(MemberManager &memberManager)
 
         std::string username;
         std::cout << "Enter your username: ";
-        std::getline(std::cin.ignore(), username);
+        std::getline(std::cin, username);
 
         std::string password;
         std::cout << "Enter your password: ";
@@ -57,6 +57,7 @@ bool Prompt::loginMember(MemberManager &memberManager)
 
             std::cout << "Try again? (Y/n) ";
             std::cin >> prompt;
+            std::cin.ignore();
 
             if (prompt == 'n')
             {
@@ -68,6 +69,172 @@ bool Prompt::loginMember(MemberManager &memberManager)
     return false;
 }
 
+bool Prompt::memberRegisterMotorbike(Member &member, MotorbikeManager &motorbikeManager)
+{
+    do
+    {
+        Utils::clrscr();
+
+        std::string model;
+        std::cout << "Enter model: ";
+        std::getline(std::cin, model);
+
+        std::string color;
+        std::cout << "Enter color: ";
+        std::getline(std::cin, color);
+
+        std::string engine_size;
+        std::cout << "Enter engine size: ";
+        std::getline(std::cin, engine_size);
+
+        std::string transmission_mode;
+        std::cout << "Enter transmission mode: ";
+        std::getline(std::cin, transmission_mode);
+
+        std::string year_made;
+        std::cout << "Enter year made: ";
+        std::getline(std::cin, year_made);
+
+        std::string description;
+        std::cout << "Enter description: ";
+        std::getline(std::cin, description);
+
+        std::string location;
+        std::cout << "Enter location: ";
+        std::getline(std::cin, location);
+      
+        Motorbike *motorbike = motorbikeManager.registerMotorbike(member.id_, model, color, engine_size, transmission_mode, std::stoi(year_made), description, 0, 0, location);
+
+        member.setOwnedMotorbike(motorbike);
+
+        return true;
+    } while (true);
+
+    return false;
+}
+
+void Prompt::memberViewDetails(Member &member)
+{
+    Utils::clrscr();
+
+    std::cout << member.toString(true) << std::endl
+              << std::endl
+              << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+}
+
+bool Prompt::memberTopup(Member &member)
+{
+    do
+    {
+        Utils::clrscr();
+
+        std::string amount;
+        std::cout << "Enter amount: ";
+        std::getline(std::cin, amount);
+
+        try
+        {
+            member.topUp(std::stoi(amount));
+            std::cout << std::endl
+                      << "Press any key to exit"
+                      << std::endl;
+            std::cin.ignore();
+
+            return true;
+        }
+        catch (int error)
+        {
+            char prompt;
+
+            if (error == 400)
+            {
+                std::cout << "Amount must be positive" << std::endl;
+            }
+
+            std::cout << "Try again? (Y/n) ";
+            std::cin >> prompt;
+
+            if (prompt == 'n')
+            {
+                break;
+            }
+        }
+    } while (true);
+
+    return false;
+}
+
+void Prompt::memberListMotorbike(Member &currentMember)
+{
+        Utils::clrscr();
+
+        std::string start_date;
+        std::cout << "Enter start date (yyyy/mm/dd): ";
+        std::getline(std::cin, start_date);
+
+        std::string end_date;
+        std::cout << "Enter end date (yyyy/mm/dd): ";
+        std::getline(std::cin, end_date);
+
+        std::string consume_point;
+        std::cout << "Enter consume point (per day): ";
+        std::getline(std::cin, consume_point);
+
+        std::string renter_rating;
+        std::cout << "Enter required renter rating: ";
+        std::getline(std::cin, renter_rating);
+
+        currentMember.getOwnedMotorbike()->setList(Date(start_date), Date(end_date), std::stoi(consume_point), std::stod(renter_rating));
+
+    std::cout << "Listed successfully" << std::endl
+              << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+}
+
+void Prompt::memberUnlistMotorbike(Member &currentMember) {
+    Utils::clrscr();
+
+    try {
+        currentMember.getOwnedMotorbike()->setUnlist();
+
+        std::cout << "Unlist successfully" << std::endl;
+    } catch (int error) {
+        if (error == 400) {
+            std::cout << "Motorbike is being rented" << std::endl;
+        } else {
+            std::cout << "Something went wrong" << std::endl;
+        }
+    }
+
+    std::cout << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+}
+
+void Prompt::memberViewAvailableMotorbikes(Member &member, MotorbikeManager &motorbikeManager, MemberRatingManager &memberRatingManager)
+{
+    Utils::clrscr();
+
+    std::string city;
+    std::cout << "Enter city: ";
+    std::getline(std::cin, city);
+
+    for (Motorbike *motorbike : motorbikeManager.getMotorbikes())
+    {
+        if (motorbike->getStartDate().getDay() != 0 && // if listed
+            motorbike->getRenterId() == 0 && // if unrented
+            motorbike->getPointConsumed() <= member.getCreditPoint() && // if member has enough point
+            memberRatingManager.getAverageRating(member.id_) >= motorbike->getRequiredRating() && // if member rating is enough
+            motorbike->getLocation() == city)
+        {
+            std::cout << motorbike->toString() << std::endl;
+        }
+    }
+
+    std::cout << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+}
+
 bool Prompt::registerMember(MemberManager &memberManager)
 {
     do
@@ -76,7 +243,7 @@ bool Prompt::registerMember(MemberManager &memberManager)
 
         std::string username;
         std::cout << "Enter your username: ";
-        std::getline(std::cin.ignore(), username);
+        std::getline(std::cin, username);
 
         std::string password;
         std::cout << "Enter your password: ";
@@ -178,7 +345,7 @@ bool Prompt::loginAdmin()
 
         std::string username;
         std::cout << "Enter your username: ";
-        std::getline(std::cin.ignore(), username);
+        std::getline(std::cin, username);
 
         std::string password;
         std::cout << "Enter your password: ";

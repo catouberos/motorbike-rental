@@ -20,6 +20,21 @@ std::string Date::toString()
     return std::to_string(day_) + "/" + std::to_string(month_) + "/" + std::to_string(year_);
 }
 
+unsigned int Date::getYear()
+{
+    return year_;
+}
+
+unsigned int Date::getMonth()
+{
+    return month_;
+}
+
+unsigned int Date::getDay()
+{
+    return day_;
+}
+
 std::string Date::serialize()
 {
     std::ostringstream oss;

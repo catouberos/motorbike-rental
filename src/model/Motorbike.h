@@ -44,6 +44,13 @@ public:
     
     Date getStartDate();
     Date getEndDate();
+    unsigned int getRenterId();
+    unsigned int getPointConsumed();
+    double getRequiredRating();
+    std::string getLocation();
+
+    bool setList(Date start_date, Date end_date, unsigned int point_consume, double required_rating);
+    bool setUnlist();
 
     std::string toString(bool detailed = false) override;
 
