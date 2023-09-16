@@ -84,7 +84,7 @@ bool MotorbikeRatingManager::init(MotorbikeManager &motorbikeManager, MemberMana
         std::getline(file, renterId, ',');
         std::getline(file, motorbikeId, ',');
         std::getline(file, rating, ',');
-        std::getline(file, review);
+        std::getline(file, review, '\n');
 
         Member *renter = memberManager.getMemberFromId(std::stoi(renterId));
         Motorbike *motorbike = motorbikeManager.getMotorbikeFromId(std::stoi(motorbikeId));

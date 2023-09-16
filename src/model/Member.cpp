@@ -32,6 +32,17 @@ bool Member::setOwnedMotorbike(Motorbike *motorbike)
     return true;
 }
 
+bool Member::setRentedMotorbike(Motorbike *motorbike)
+{
+    if (motorbike == nullptr)
+    {
+        return false;
+    }
+
+    rented_motorbike_ = motorbike;
+    return true;
+}
+
 std::string Member::getFullName()
 {
     return full_name_;

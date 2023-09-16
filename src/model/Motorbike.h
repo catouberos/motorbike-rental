@@ -51,6 +51,7 @@ public:
 
     bool setList(Date start_date, Date end_date, unsigned int point_consume, double required_rating);
     bool setUnlist();
+    bool setRenterId(unsigned int renter_id);
 
     std::string toString(bool detailed = false) override;
 

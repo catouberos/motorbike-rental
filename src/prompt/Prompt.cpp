@@ -223,9 +223,10 @@ void Prompt::memberViewAvailableMotorbikes(Member &member, MotorbikeManager &mot
     {
         if (motorbike->getStartDate().getDay() != 0 && // if listed
             motorbike->getRenterId() == 0 && // if unrented
+            motorbike->id_ != member.getOwnedMotorbike()->id_ && // if not owned by member
             motorbike->getPointConsumed() <= member.getCreditPoint() && // if member has enough point
             memberRatingManager.getAverageRating(member.id_) >= motorbike->getRequiredRating() && // if member rating is enough
-            motorbike->getLocation() == city)
+            motorbike->getLocation() == city) // if in the search city
         {
             std::cout << motorbike->toString() << std::endl;
         }
@@ -233,6 +234,137 @@ void Prompt::memberViewAvailableMotorbikes(Member &member, MotorbikeManager &mot
 
     std::cout << "Press any key to exit" << std::endl;
     std::cin.ignore();
+}
+
+void Prompt::memberRequest(Member &currentMember, MotorbikeManager &motorbikeManager, MemberRatingManager &memberRatingManager, RequestManager &requestManager)
+{
+    Utils::clrscr();
+
+    std::string motorbike_id;
+    std::cout << "Enter motorbike id: ";
+    std::getline(std::cin, motorbike_id);
+
+    Motorbike *motorbike = motorbikeManager.getMotorbikeFromId(std::stoi(motorbike_id));
+
+    if (motorbike == nullptr)
+    {
+        std::cout << "Motorbike not found" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    if (currentMember.getRentedMotorbike() != nullptr)
+    {
+        std::cout << "You cannot rent more than one motorbike" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    if (motorbike->id_ == currentMember.getOwnedMotorbike()->id_)
+    {
+        std::cout << "You cannot rent your own motorbike" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    if (motorbike->getStartDate().getDay() == 0)
+    {
+        std::cout << "Motorbike is not listed" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    if (motorbike->getRenterId() != 0)
+    {
+        std::cout << "Motorbike is being rented" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    if (motorbike->getPointConsumed() > currentMember.getCreditPoint())
+    {
+        std::cout << "You do not have enough credit point" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    if (motorbike->getRequiredRating() > memberRatingManager.getAverageRating(currentMember.id_))
+    {
+        std::cout << "Your rating is not enough" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    Request *request = new Request(requestManager.getUnusedId(), &currentMember, motorbike, RequestState::PENDING);
+    requestManager.add(request);
+}
+
+void Prompt::memberViewRequests(Member &currentMember, RequestManager &requestManager)
+{
+    Utils::clrscr();
+
+    for (Request *request : requestManager.getRequestsFromMotorbike(*currentMember.getOwnedMotorbike()))
+    {
+        std::cout << request->toString() << std::endl;
+    }
+
+    std::cout << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+}
+
+void Prompt::memberAcceptRequest(Member &currentMember, RequestManager &requestManager)
+{
+    Utils::clrscr();
+
+    std::string request_id;
+    std::cout << "Enter request id: ";
+    std::getline(std::cin, request_id);
+
+    Request *request = requestManager.getRequestFromId(std::stoi(request_id));
+
+    if (request == nullptr)
+    {
+        std::cout << "Request not found" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    if (request->getMotorbike()->id_ != currentMember.getOwnedMotorbike()->id_)
+    {
+        std::cout << "You cannot accept this request" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    if (request->getState() != RequestState::PENDING)
+    {
+        std::cout << "Request is not pending" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    request->setState(RequestState::ACCEPTED);
+    request->getSender()->setRentedMotorbike(request->getMotorbike());
+    request->getMotorbike()->setRenterId(request->getSender()->id_);
+
+    // set all other requests to rejected
+    for (Request *request : requestManager.getRequestsFromMotorbike(*currentMember.getOwnedMotorbike()))
+    {
+        if (request->getState() == RequestState::PENDING)
+        {
+            request->setState(RequestState::REJECTED);
+        }
+    }
 }
 
 bool Prompt::registerMember(MemberManager &memberManager)

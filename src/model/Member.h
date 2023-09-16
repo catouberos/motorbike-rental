@@ -37,6 +37,7 @@ public:
            Motorbike *rented_motorbike);
 
     bool setOwnedMotorbike(Motorbike *motorbike);
+    bool setRentedMotorbike(Motorbike *motorbike);
 
     std::string getFullName();
     unsigned int getCreditPoint();

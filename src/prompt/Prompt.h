@@ -5,6 +5,7 @@
 #include "../manager/MotorbikeManager.h"
 #include "../manager/MemberRatingManager.h"
 #include "../manager/MotorbikeRatingManager.h"
+#include "../manager/RequestManager.h"
 
 class Prompt
 {
@@ -20,6 +21,9 @@ public:
     static void memberViewAvailableMotorbikes(Member &member, MotorbikeManager &motorbikeManager, MemberRatingManager &memberRatingManager);
     static void memberListMotorbike(Member &currentMember);
     static void memberUnlistMotorbike(Member &currentMember);
+    static void memberRequest(Member &currentMember, MotorbikeManager &motorbikeManager, MemberRatingManager &memberRatingManager, RequestManager &requestManager);
+    static void memberViewRequests(Member &currentMember, RequestManager &requestManager);
+    static void memberAcceptRequest(Member &currentMember, RequestManager &requestManager);
 
     static bool registerMember(MemberManager &memberManager);
     static void guestViewMotorbikes(MotorbikeManager &motorbikeManager, MotorbikeRatingManager &motorbikeRatingManager);

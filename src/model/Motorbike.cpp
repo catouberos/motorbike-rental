@@ -67,6 +67,17 @@ bool Motorbike::setUnlist()
     return true;
 }
 
+bool Motorbike::setRenterId(unsigned int renter_id)
+{
+    if (renter_id_ != 0) {
+        throw 400;
+    }
+
+    renter_id_ = renter_id;
+
+    return true;
+}
+
 unsigned int Motorbike::getPointConsumed() {
     return point_consume_;
 }

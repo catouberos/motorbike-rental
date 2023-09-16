@@ -1,18 +1,35 @@
-#include <iostream>
 #ifndef REQUEST_H
 #define REQUEST_H
-class Request
+
+#include <iostream>
+
+#include "Entity.h"
+#include "Member.h"
+
+enum RequestState {
+    PENDING,
+    ACCEPTED,
+    REJECTED,
+    COMPLETED,
+};
+
+class Request : public Entity
 {
-    int m_senderID{};
-    int m_receiverID{};
+    Member* sender;
+    Motorbike* motorbike;
+    RequestState state;
 
 public: 
-    Request() = default;
-    Request(int senderID, int receiverID)
-        :m_senderID{senderID}, m_receiverID{receiverID}{}
+    Request(unsigned int id, Member* sender, Motorbike* motorbike, RequestState state = PENDING);
 
-    friend class System;
-    
-    std::string toFile();
+    Motorbike* getMotorbike();
+    Member* getSender();
+    RequestState getState();
+
+    bool setState(RequestState state);
+
+    std::string toString();
+
+    std::string serialize();
 };
 #endif

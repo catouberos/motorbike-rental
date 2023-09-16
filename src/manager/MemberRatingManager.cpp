@@ -101,7 +101,7 @@ bool MemberRatingManager::init(MemberManager &memberManager)
         std::getline(file, ownerId, ',');
         std::getline(file, renterId, ',');
         std::getline(file, rating, ',');
-        std::getline(file, review);
+        std::getline(file, review, '\n');
 
         Member *owner = memberManager.getMemberFromId(std::stoi(ownerId));
         Member *member = memberManager.getMemberFromId(std::stoi(renterId));
