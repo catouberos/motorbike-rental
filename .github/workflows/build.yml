@@ -10,11 +10,11 @@ jobs:
       - name: Checkout project sources
         uses: actions/checkout@v4
 
-      - name: Install build tools
-        run: sudo apt update && sudo apt install build-essential
+      - name: Install Zig
+        uses: snap install zig --classic --beta
 
-      - name: Install zig
-        uses: goto-bus-stop/setup-zig@v2
+      - name: List dir
+        uses: ls .
 
       - name: Build
         run: zig c++ ./src/**/*.cpp
