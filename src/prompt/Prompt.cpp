@@ -102,7 +102,7 @@ bool Prompt::memberRegisterMotorbike(Member &member, MotorbikeManager &motorbike
         std::string location;
         std::cout << "Enter location: ";
         std::getline(std::cin, location);
-      
+
         Motorbike *motorbike = motorbikeManager.registerMotorbike(member.id_, model, color, engine_size, transmission_mode, std::stoi(year_made), description, 0, 0, location);
 
         member.setOwnedMotorbike(motorbike);
@@ -167,42 +167,49 @@ bool Prompt::memberTopup(Member &member)
 
 void Prompt::memberListMotorbike(Member &currentMember)
 {
-        Utils::clrscr();
+    Utils::clrscr();
 
-        std::string start_date;
-        std::cout << "Enter start date (yyyy/mm/dd): ";
-        std::getline(std::cin, start_date);
+    std::string start_date;
+    std::cout << "Enter start date (yyyy/mm/dd): ";
+    std::getline(std::cin, start_date);
 
-        std::string end_date;
-        std::cout << "Enter end date (yyyy/mm/dd): ";
-        std::getline(std::cin, end_date);
+    std::string end_date;
+    std::cout << "Enter end date (yyyy/mm/dd): ";
+    std::getline(std::cin, end_date);
 
-        std::string consume_point;
-        std::cout << "Enter consume point (per day): ";
-        std::getline(std::cin, consume_point);
+    std::string consume_point;
+    std::cout << "Enter consume point (per day): ";
+    std::getline(std::cin, consume_point);
 
-        std::string renter_rating;
-        std::cout << "Enter required renter rating: ";
-        std::getline(std::cin, renter_rating);
+    std::string renter_rating;
+    std::cout << "Enter required renter rating: ";
+    std::getline(std::cin, renter_rating);
 
-        currentMember.getOwnedMotorbike()->setList(Date(start_date), Date(end_date), std::stoi(consume_point), std::stod(renter_rating));
+    currentMember.getOwnedMotorbike()->setList(Date(start_date), Date(end_date), std::stoi(consume_point), std::stod(renter_rating));
 
     std::cout << "Listed successfully" << std::endl
               << "Press any key to exit" << std::endl;
     std::cin.ignore();
 }
 
-void Prompt::memberUnlistMotorbike(Member &currentMember) {
+void Prompt::memberUnlistMotorbike(Member &currentMember)
+{
     Utils::clrscr();
 
-    try {
+    try
+    {
         currentMember.getOwnedMotorbike()->setUnlist();
 
         std::cout << "Unlist successfully" << std::endl;
-    } catch (int error) {
-        if (error == 400) {
+    }
+    catch (int error)
+    {
+        if (error == 400)
+        {
             std::cout << "Motorbike is being rented" << std::endl;
-        } else {
+        }
+        else
+        {
             std::cout << "Something went wrong" << std::endl;
         }
     }
@@ -221,12 +228,12 @@ void Prompt::memberViewAvailableMotorbikes(Member &member, MotorbikeManager &mot
 
     for (Motorbike *motorbike : motorbikeManager.getMotorbikes())
     {
-        if (motorbike->getStartDate().getDay() != 0 && // if listed
-            motorbike->getRenterId() == 0 && // if unrented
-            motorbike->id_ != member.getOwnedMotorbike()->id_ && // if not owned by member
-            motorbike->getPointConsumed() <= member.getCreditPoint() && // if member has enough point
+        if (motorbike->getStartDate().getDay() != 0 &&                                            // if listed
+            motorbike->getRenterId() == 0 &&                                                      // if unrented
+            motorbike->id_ != member.getOwnedMotorbike()->id_ &&                                  // if not owned by member
+            motorbike->getPointConsumed() <= member.getCreditPoint() &&                           // if member has enough point
             memberRatingManager.getAverageRating(member.id_) >= motorbike->getRequiredRating() && // if member rating is enough
-            motorbike->getLocation() == city) // if in the search city
+            motorbike->getLocation() == city)                                                     // if in the search city
         {
             std::cout << motorbike->toString() << std::endl;
         }

@@ -1,5 +1,5 @@
-#ifndef MOTORBIKE_RATING_MANAGER_
-#define MOTORBIKE_RATING_MANAGER_
+#ifndef MOTORBIKE_RATING_MANAGER_H_
+#define MOTORBIKE_RATING_MANAGER_H_
 
 #include <vector>
 #include <string>
@@ -8,7 +8,8 @@
 #include "MotorbikeManager.h"
 #include "MemberManager.h"
 
-class MotorbikeRatingManager {
+class MotorbikeRatingManager
+{
     std::vector<MotorbikeRating *> ratings_;
 
 public:

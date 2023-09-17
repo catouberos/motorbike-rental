@@ -63,8 +63,10 @@ Motorbike *Member::getRentedMotorbike()
     return rented_motorbike_;
 }
 
-bool Member::topUp(unsigned int amount) {
-    if (amount < 0) {
+bool Member::topUp(unsigned int amount)
+{
+    if (amount < 0)
+    {
         return false;
     }
 

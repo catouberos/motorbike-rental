@@ -1,5 +1,5 @@
-#ifndef MEMBER_RATING_
-#define MEMBER_RATING_
+#ifndef MEMBER_RATING_H_
+#define MEMBER_RATING_H_
 
 #include <string>
 
@@ -7,7 +7,8 @@
 #include "Motorbike.h"
 
 // this class is to preserve member rating, which a motorbike owner would given a rating to a member after rental
-class MemberRating {
+class MemberRating
+{
     Member *owner;
     Member *member;
     double rating_;

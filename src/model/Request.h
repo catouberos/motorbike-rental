@@ -1,12 +1,13 @@
-#ifndef REQUEST_H
-#define REQUEST_H
+#ifndef REQUEST_H_
+#define REQUEST_H_
 
 #include <iostream>
 
 #include "Entity.h"
 #include "Member.h"
 
-enum RequestState {
+enum RequestState
+{
     PENDING,
     ACCEPTED,
     REJECTED,
@@ -15,15 +16,15 @@ enum RequestState {
 
 class Request : public Entity
 {
-    Member* sender;
-    Motorbike* motorbike;
+    Member *sender;
+    Motorbike *motorbike;
     RequestState state;
 
-public: 
-    Request(unsigned int id, Member* sender, Motorbike* motorbike, RequestState state = PENDING);
+public:
+    Request(unsigned int id, Member *sender, Motorbike *motorbike, RequestState state = PENDING);
 
-    Motorbike* getMotorbike();
-    Member* getSender();
+    Motorbike *getMotorbike();
+    Member *getSender();
     RequestState getState();
 
     bool setState(RequestState state);

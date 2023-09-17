@@ -31,15 +31,18 @@ Motorbike::Motorbike(
                               owner_id_(owner_id),
                               renter_id_(renter_id){};
 
-Date Motorbike::getStartDate() {
+Date Motorbike::getStartDate()
+{
     return start_date_;
 }
 
-Date Motorbike::getEndDate() {
+Date Motorbike::getEndDate()
+{
     return end_date_;
 }
 
-unsigned int Motorbike::getRenterId() {
+unsigned int Motorbike::getRenterId()
+{
     return renter_id_;
 }
 
@@ -55,7 +58,8 @@ bool Motorbike::setList(Date start_date, Date end_date, unsigned int point_consu
 
 bool Motorbike::setUnlist()
 {
-    if (renter_id_ == 0) {
+    if (renter_id_ == 0)
+    {
         throw 400;
     }
 
@@ -69,7 +73,8 @@ bool Motorbike::setUnlist()
 
 bool Motorbike::setRenterId(unsigned int renter_id)
 {
-    if (renter_id_ != 0) {
+    if (renter_id_ != 0)
+    {
         throw 400;
     }
 
@@ -78,15 +83,18 @@ bool Motorbike::setRenterId(unsigned int renter_id)
     return true;
 }
 
-unsigned int Motorbike::getPointConsumed() {
+unsigned int Motorbike::getPointConsumed()
+{
     return point_consume_;
 }
 
-double Motorbike::getRequiredRating() {
+double Motorbike::getRequiredRating()
+{
     return required_rating_;
 }
 
-std::string Motorbike::getLocation() {
+std::string Motorbike::getLocation()
+{
     return location_;
 }
 
@@ -94,7 +102,8 @@ std::string Motorbike::toString(bool detailed)
 {
     std::ostringstream oss;
 
-    if (detailed) {
+    if (detailed)
+    {
         oss << "ID: " << id_ << std::endl
             << "Owner ID: " << owner_id_ << std::endl
             << "Model: " << model_ << std::endl
@@ -107,12 +116,15 @@ std::string Motorbike::toString(bool detailed)
             << "Required renter rating: " << required_rating_ << std::endl
             << "Consuming point: " << point_consume_ << std::endl
             << "Location: " << location_ << std::endl;
-        if (renter_id_ != 0) {
+        if (renter_id_ != 0)
+        {
             oss << "Renter ID: " << renter_id_ << std::endl
                 << "Rented from: " << start_date_.toString() << std::endl
                 << "Rented to: " << end_date_.toString() << std::endl;
-            }
-    } else {
+        }
+    }
+    else
+    {
         oss << "ID: " << id_ << std::endl
             << "Model: " << model_ << std::endl
             << "Color: " << color_ << std::endl
@@ -126,9 +138,12 @@ std::string Motorbike::toString(bool detailed)
             << "Location: " << location_ << std::endl
             << std::endl;
 
-        if (renter_id_ != 0) {
+        if (renter_id_ != 0)
+        {
             oss << "Currently being rented by " << renter_id_ << std::endl;
-        } else if (start_date_.getDay() != 0) {
+        }
+        else if (start_date_.getDay() != 0)
+        {
             oss << "Available for rent" << std::endl;
         }
     }

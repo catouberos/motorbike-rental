@@ -41,7 +41,7 @@ public:
         Date end_date,
         unsigned int owner_id,
         unsigned int renter_id);
-    
+
     Date getStartDate();
     Date getEndDate();
     unsigned int getRenterId();

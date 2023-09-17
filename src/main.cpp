@@ -141,14 +141,19 @@ int main()
                     if (current_member->getOwnedMotorbike() == nullptr)
                     {
                         std::cout << "You currently are not owning any motorbike, press [9] to register one." << std::endl;
-                    } else {
-                        if (current_member->getOwnedMotorbike()->getStartDate().getDay() == 0) {
+                    }
+                    else
+                    {
+                        if (current_member->getOwnedMotorbike()->getStartDate().getDay() == 0)
+                        {
                             std::cout << "Your motorbike is currently unlisted, press [10] to list it." << std::endl;
-                        } else {
+                        }
+                        else
+                        {
                             std::cout << "Your motorbike is currently listed, press [10] to unlist it." << std::endl;
                         }
                     }
-                    
+
                     std::cout << std::endl;
 
                     std::cout << "[1] View your information" << std::endl
@@ -196,18 +201,21 @@ int main()
                         break;
 
                     case 9:
-                        if (current_member->getOwnedMotorbike() == nullptr) {
+                        if (current_member->getOwnedMotorbike() == nullptr)
+                        {
                             Prompt::memberRegisterMotorbike(*current_member, motorbikeManager);
                         }
                         break;
 
                     case 10:
-                        if (current_member->getOwnedMotorbike() != nullptr && current_member->getOwnedMotorbike()->getStartDate().getDay() == 0) {
+                        if (current_member->getOwnedMotorbike() != nullptr && current_member->getOwnedMotorbike()->getStartDate().getDay() == 0)
+                        {
                             Prompt::memberListMotorbike(*current_member);
                             break;
                         }
 
-                        if (current_member->getOwnedMotorbike() != nullptr) {
+                        if (current_member->getOwnedMotorbike() != nullptr)
+                        {
                             Prompt::memberUnlistMotorbike(*current_member);
                             break;
                         }
@@ -275,13 +283,3 @@ int main()
 
     return 0;
 }
-
-/*                   {
-                std::cout << "This is your menu:\n";
-                std::cout << "2. Rate the motorbike you are renting\n";
-                std::cout << "3. Rate current renter\n";
-                std::cout << "5. Request motorbike\n";
-                std::cout << "6. View request list\n";
-                std::cout << "7. Accept request\n";
-                std::cout << "11. Return motorbike\n";
-*/

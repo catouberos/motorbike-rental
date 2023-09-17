@@ -1,5 +1,5 @@
-#ifndef MEMBER_RATING_MANAGER_
-#define MEMBER_RATING_MANAGER_
+#ifndef MEMBER_RATING_MANAGER_H_
+#define MEMBER_RATING_MANAGER_H_
 
 #include <vector>
 #include <string>
@@ -7,7 +7,8 @@
 #include "../model/MemberRating.h"
 #include "MemberManager.h"
 
-class MemberRatingManager {
+class MemberRatingManager
+{
     std::vector<MemberRating *> ratings_;
 
 public:

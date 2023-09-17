@@ -15,7 +15,7 @@ unsigned int RequestManager::getUnusedId()
     return requests_.size() + 1;
 }
 
-Request* RequestManager::getRequestFromId(unsigned int id)
+Request *RequestManager::getRequestFromId(unsigned int id)
 {
     for (Request *request : requests_)
     {
@@ -28,9 +28,9 @@ Request* RequestManager::getRequestFromId(unsigned int id)
     throw 404;
 }
 
-std::vector<Request*> RequestManager::getRequestsFromMotorbike(Motorbike &motorbike)
+std::vector<Request *> RequestManager::getRequestsFromMotorbike(Motorbike &motorbike)
 {
-    std::vector<Request*> requests;
+    std::vector<Request *> requests;
     for (Request *request : requests_)
     {
         if (request->getMotorbike()->id_ == motorbike.id_)
@@ -105,8 +105,7 @@ bool RequestManager::init(MemberManager &memberManager, MotorbikeManager &motorb
             std::stoi(id),
             sender,
             motorbike,
-            request_state
-        );
+            request_state);
 
         add(request);
     }

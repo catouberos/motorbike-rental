@@ -9,7 +9,7 @@
 
 class RequestManager
 {
-    std::vector<Request*> requests_;
+    std::vector<Request *> requests_;
 
 public:
     RequestManager();

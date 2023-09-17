@@ -4,8 +4,9 @@
 MemberRating::MemberRating(Member *owner, Member *member, double rating, std::string review)
     : owner{owner}, member{member}, rating_{rating}, review_{review} {}
 
-std::string MemberRating::toString() {
-    std:std::ostringstream oss;
+std::string MemberRating::toString()
+{
+    std::ostringstream oss;
 
     oss << "Rating from " << owner->getFullName() << std::endl
         << "Rating: " << rating_ << std::endl
@@ -14,7 +15,8 @@ std::string MemberRating::toString() {
     return oss.str();
 }
 
-std::string MemberRating::serialize() {
+std::string MemberRating::serialize()
+{
     std::ostringstream oss;
 
     oss << owner->id_ << ","

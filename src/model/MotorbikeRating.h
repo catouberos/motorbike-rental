@@ -1,12 +1,13 @@
-#ifndef MOTORBIKE_RATING_
-#define MOTORBIKE_RATING_
+#ifndef MOTORBIKE_RATING_H_
+#define MOTORBIKE_RATING_H_
 
 #include <string>
 
 #include "Member.h"
 #include "Motorbike.h"
 
-class MotorbikeRating {
+class MotorbikeRating
+{
     Member *renter;
     Motorbike *motorbike;
     double rating_;
