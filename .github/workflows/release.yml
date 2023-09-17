@@ -16,16 +16,16 @@ jobs:
         run: sudo snap install zig --classic --beta
 
       - name: Build for Linux (x86_64)
-        run: zig c++ ./src/**/*.cpp -o motorbike-rental-linux
+        run: zig c++ ./src/main.cpp ./src/**/*.cpp -o motorbike-rental-linux
 
       - name: Build for Windows (x86_64)
-        run: zig c++ ./src/**/*.cpp -o motorbike-rental-windows.exe -target x86_64-windows
+        run: zig c++ ./src/main.cpp ./src/**/*.cpp -o motorbike-rental-windows.exe -target x86_64-windows
 
       - name: Build for macOS (x86_64)
-        run: zig c++ ./src/**/*.cpp -o motorbike-rental-macos -target x86_64-macos
+        run: zig c++ ./src/main.cpp ./src/**/*.cpp -o motorbike-rental-macos -target x86_64-macos
 
       - name: Build for macOS (aarch64)
-        run: zig c++ ./src/**/*.cpp -o motorbike-rental-macos-arm -target aarch64-macos
+        run: zig c++ ./src/main.cpp ./src/**/*.cpp -o motorbike-rental-macos-arm -target aarch64-macos
 
       - name: Generate release tag
         id: tag

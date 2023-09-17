@@ -15,6 +15,11 @@ unsigned int RequestManager::getUnusedId()
     return requests_.size() + 1;
 }
 
+std::vector<Request *> RequestManager::getRequests()
+{
+    return requests_;
+}
+
 Request *RequestManager::getRequestFromId(unsigned int id)
 {
     for (Request *request : requests_)

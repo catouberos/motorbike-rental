@@ -17,6 +17,7 @@ public:
     bool add(Request *request);
 
     unsigned int getUnusedId();
+    std::vector<Request *> getRequests();
 
     Request *getRequestFromId(unsigned int id);
 

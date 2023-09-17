@@ -24,6 +24,10 @@ public:
     static void memberRequest(Member &currentMember, MotorbikeManager &motorbikeManager, MemberRatingManager &memberRatingManager, RequestManager &requestManager);
     static void memberViewRequests(Member &currentMember, RequestManager &requestManager);
     static void memberAcceptRequest(Member &currentMember, RequestManager &requestManager);
+    static void memberViewRenters(Member &currentMember, RequestManager &requestManager);
+    static void memberRateRenter(Member &currentMember, MemberManager &memberManager, MemberRatingManager &memberRatingManager);
+    static void memberRateMotorbike(Member &currentMember, MotorbikeRatingManager &motorbikeRatingManager);
+    static void memberReturnMotorbike(Member &currentMember);
 
     static bool registerMember(MemberManager &memberManager);
     static void guestViewMotorbikes(MotorbikeManager &motorbikeManager, MotorbikeRatingManager &motorbikeRatingManager);

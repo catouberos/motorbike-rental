@@ -159,13 +159,27 @@ int main()
                     std::cout << "[1] View your information" << std::endl
                               << "[2] Topup credits" << std::endl
                               << std::endl
+                              << "[3] View renters of your bike" << std::endl
+                              << "[4] Rate current renter" << std::endl
+                              << std::endl
                               << "[5] View requests to rent your bike" << std::endl
                               << "[6] Accept a request" << std::endl
-                              << std::endl
-                              << "[7] Find available motorbikes for rent" << std::endl
-                              << "[8] Request to rent" << std::endl
-                              << std::endl
-                              << "[0] Exit" << std::endl
+                              << std::endl;
+
+                    if (current_member->getRentedMotorbike() == nullptr)
+                    {
+                        std::cout << "[7] Find available motorbikes for rent" << std::endl
+                                  << "[8] Request to rent" << std::endl
+                                  << std::endl;
+                    }
+                    else
+                    {
+                        std::cout << "[7] Rate your rented motorbike" << std::endl
+                                  << "[8] Return your rented motorbike" << std::endl
+                                  << std::endl;
+                    }
+
+                    std::cout << "[0] Exit" << std::endl
                               << std::endl
                               << "Enter your choice: ";
                     std::cin >> userChoice;
@@ -184,6 +198,14 @@ int main()
                         Prompt::memberTopup(*current_member);
                         break;
 
+                    case 3:
+                        Prompt::memberViewRenters(*current_member, requestManager);
+                        break;
+
+                    case 4:
+                        Prompt::memberRateRenter(*current_member, memberManager, memberRatingManager);
+                        break;
+
                     case 5:
                         Prompt::memberViewRequests(*current_member, requestManager);
                         break;
@@ -193,12 +215,28 @@ int main()
                         break;
 
                     case 7:
-                        Prompt::memberViewAvailableMotorbikes(*current_member, motorbikeManager, memberRatingManager);
-                        break;
+                        if (current_member->getRentedMotorbike() == nullptr)
+                        {
+                            Prompt::memberViewAvailableMotorbikes(*current_member, motorbikeManager, memberRatingManager);
+                            break;
+                        }
+                        else
+                        {
+                            Prompt::memberRateMotorbike(*current_member, motorbikeRatingManager);
+                            break;
+                        }
 
                     case 8:
-                        Prompt::memberRequest(*current_member, motorbikeManager, memberRatingManager, requestManager);
-                        break;
+                        if (current_member->getRentedMotorbike() == nullptr)
+                        {
+                            Prompt::memberRequest(*current_member, motorbikeManager, memberRatingManager, requestManager);
+                            break;
+                        }
+                        else
+                        {
+                            Prompt::memberReturnMotorbike(*current_member);
+                            break;
+                        }
 
                     case 9:
                         if (current_member->getOwnedMotorbike() == nullptr)

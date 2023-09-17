@@ -374,6 +374,85 @@ void Prompt::memberAcceptRequest(Member &currentMember, RequestManager &requestM
     }
 }
 
+void Prompt::memberViewRenters(Member &currentMember, RequestManager &requestManager)
+{
+    Utils::clrscr();
+
+    for (Request *request : requestManager.getRequestsFromMotorbike(*currentMember.getOwnedMotorbike()))
+    {
+        if (request->getState() == RequestState::ACCEPTED)
+        {
+            std::cout << request->toString() << std::endl;
+        }
+    }
+
+    std::cout << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+}
+
+void Prompt::memberRateRenter(Member &currentMember, MemberManager &memberManager, MemberRatingManager &memberRatingManager)
+{
+    Utils::clrscr();
+
+    std::string score;
+    std::cout << "Enter score: ";
+    std::getline(std::cin, score);
+
+    std::string review;
+    std::cout << "Enter review: ";
+    std::getline(std::cin, review);
+
+    MemberRating *rating = new MemberRating(&currentMember, memberManager.getMemberFromId(currentMember.getOwnedMotorbike()->getRenterId()), std::stod(score), review);
+
+    if (rating == nullptr)
+    {
+        std::cout << "Something went wrong" << std::endl
+                  << "Press any key to exit" << std::endl;
+        std::cin.ignore();
+        return;
+    }
+
+    memberRatingManager.add(rating);
+
+    std::cout << "Rated successfully" << std::endl
+              << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+    return;
+}
+
+void Prompt::memberRateMotorbike(Member &currentMember, MotorbikeRatingManager &motorbikeRatingManager)
+{
+    Utils::clrscr();
+
+    std::string score;
+    std::cout << "Enter score: ";
+    std::getline(std::cin, score);
+
+    std::string review;
+    std::cout << "Enter review: ";
+    std::getline(std::cin, review);
+
+    MotorbikeRating *rating = new MotorbikeRating(&currentMember, currentMember.getRentedMotorbike(), std::stod(score), review);
+    motorbikeRatingManager.add(rating);
+
+    std::cout << "Rated successfully" << std::endl
+              << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+    return;
+}
+
+void Prompt::memberReturnMotorbike(Member &currentMember)
+{
+    Utils::clrscr();
+
+    currentMember.getRentedMotorbike()->setRenterId(0);
+    currentMember.setRentedMotorbike(nullptr);
+
+    std::cout << "Returned successfully" << std::endl
+              << "Press any key to exit" << std::endl;
+    std::cin.ignore();
+}
+
 bool Prompt::registerMember(MemberManager &memberManager)
 {
     do

@@ -23,22 +23,12 @@ Member::Member(unsigned int id,
 
 bool Member::setOwnedMotorbike(Motorbike *motorbike)
 {
-    if (motorbike == nullptr)
-    {
-        return false;
-    }
-
     owned_motorbike_ = motorbike;
     return true;
 }
 
 bool Member::setRentedMotorbike(Motorbike *motorbike)
 {
-    if (motorbike == nullptr)
-    {
-        return false;
-    }
-
     rented_motorbike_ = motorbike;
     return true;
 }
