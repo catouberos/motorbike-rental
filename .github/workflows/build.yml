@@ -10,5 +10,8 @@ jobs:
       - name: Checkout project sources
         uses: actions/checkout@v4
 
+      - name: Install Zig
+        run: sudo snap install zig --classic --beta
+
       - name: Build
-        run: g++ ./src/**/*.cpp
+        run: zig c++ ./src/main.cpp ./src/**/*.cpp

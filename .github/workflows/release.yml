@@ -6,14 +6,14 @@ on:
       - main
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project sources
         uses: actions/checkout@v4
 
-      - name: Install zig
-        uses: goto-bus-stop/setup-zig@v2
+      - name: Install Zig
+        run: sudo snap install zig --classic --beta
 
       - name: Build for Linux (x86_64)
         run: zig c++ ./src/**/*.cpp -o motorbike-rental-linux
