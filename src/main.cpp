@@ -158,13 +158,17 @@ int main()
 
                     std::cout << "[1] View your information" << std::endl
                               << "[2] Topup credits" << std::endl
-                              << std::endl
-                              << "[3] View renters of your bike" << std::endl
+                              << std::endl;
+
+                    if (current_member->getOwnedMotorbike() != nullptr)
+                    {
+                    std::cout << "[3] View renters of your bike" << std::endl
                               << "[4] Rate current renter" << std::endl
                               << std::endl
                               << "[5] View requests to rent your bike" << std::endl
                               << "[6] Accept a request" << std::endl
                               << std::endl;
+                    }
 
                     if (current_member->getRentedMotorbike() == nullptr)
                     {
@@ -199,19 +203,35 @@ int main()
                         break;
 
                     case 3:
-                        Prompt::memberViewRenters(*current_member, requestManager);
+                        if (current_member->getOwnedMotorbike() != nullptr)
+                        {
+                            Prompt::memberViewRenters(*current_member, requestManager);
+                        }
+
                         break;
 
                     case 4:
-                        Prompt::memberRateRenter(*current_member, memberManager, memberRatingManager);
+                        if (current_member->getOwnedMotorbike() != nullptr)
+                        {
+                            Prompt::memberRateRenter(*current_member, memberManager, memberRatingManager);
+                        }
+
                         break;
 
                     case 5:
-                        Prompt::memberViewRequests(*current_member, requestManager);
+                        if (current_member->getOwnedMotorbike() != nullptr)
+                        {
+                            Prompt::memberViewRequests(*current_member, requestManager);
+                        }
+
                         break;
 
                     case 6:
-                        Prompt::memberAcceptRequest(*current_member, requestManager);
+                        if (current_member->getOwnedMotorbike() != nullptr)
+                        {
+                            Prompt::memberAcceptRequest(*current_member, requestManager);
+                        }
+
                         break;
 
                     case 7:
