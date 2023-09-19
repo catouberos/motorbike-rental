@@ -1,9 +1,11 @@
 #include "MemberRating.h"
 #include <sstream>
 
+//Class constructor
 MemberRating::MemberRating(Member *owner, Member *member, double rating, std::string review)
     : owner{owner}, member{member}, rating_{rating}, review_{review} {}
 
+//returns a human-readable string representation.
 std::string MemberRating::toString()
 {
     std::ostringstream oss;
@@ -15,6 +17,7 @@ std::string MemberRating::toString()
     return oss.str();
 }
 
+//returns a string representation suitable for storage.
 std::string MemberRating::serialize()
 {
     std::ostringstream oss;

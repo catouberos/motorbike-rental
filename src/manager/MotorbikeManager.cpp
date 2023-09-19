@@ -3,8 +3,10 @@
 
 #include "MotorbikeManager.h"
 
+//Class constructor
 MotorbikeManager::MotorbikeManager(){};
 
+//Class destructor
 MotorbikeManager::~MotorbikeManager()
 {
 
@@ -14,6 +16,7 @@ MotorbikeManager::~MotorbikeManager()
     }
 }
 
+//add a Motorbike object to the motorbikes_ vector.
 bool MotorbikeManager::add(Motorbike *motorbike)
 {
     motorbikes_.push_back(motorbike);
@@ -21,16 +24,19 @@ bool MotorbikeManager::add(Motorbike *motorbike)
     return true;
 }
 
+//vector containing pointers to all the Motorbike objects managed by the MotorbikeManager.
 std::vector<Motorbike *> MotorbikeManager::getMotorbikes()
 {
     return motorbikes_;
 }
 
+//returns an unused motorbike ID.
 unsigned int MotorbikeManager::getUnusedId()
 {
     return motorbikes_.size() + 1;
 }
 
+//retrieves a Motorbike object based on its ID.
 Motorbike *MotorbikeManager::getMotorbikeFromId(unsigned int id)
 {
     for (Motorbike *motorbike : motorbikes_)
@@ -44,6 +50,7 @@ Motorbike *MotorbikeManager::getMotorbikeFromId(unsigned int id)
     return nullptr;
 }
 
+//register a new motorbike.
 Motorbike *MotorbikeManager::registerMotorbike(
     unsigned int owner_id,
     std::string model,
@@ -63,6 +70,7 @@ Motorbike *MotorbikeManager::registerMotorbike(
     return motorbike;
 }
 
+//initialize the MotorbikeManager by loading motorbike data from a file.
 // very likely to break if is not serialize properly
 bool MotorbikeManager::init()
 {
@@ -125,6 +133,7 @@ bool MotorbikeManager::init()
     return true;
 }
 
+//save the current state of the motorbike data to a file.
 bool MotorbikeManager::save()
 {
 

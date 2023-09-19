@@ -3,8 +3,10 @@
 
 #include "MemberManager.h"
 
+//Class constructor
 MemberManager::MemberManager() : current_member_id_(0){};
 
+//Class destructor
 MemberManager::~MemberManager()
 {
     for (Member *member : members_)
@@ -13,6 +15,7 @@ MemberManager::~MemberManager()
     }
 }
 
+//add a Member object to the members_ vector.
 bool MemberManager::add(Member *member)
 {
     members_.push_back(member);
@@ -20,11 +23,13 @@ bool MemberManager::add(Member *member)
     return true;
 }
 
+//returns a vector containing pointers to all the Member objects managed by the MemberManager.
 std::vector<Member *> MemberManager::getMembers()
 {
     return members_;
 }
 
+//retrieves a Member object based on its ID
 Member *MemberManager::getMemberFromId(unsigned int id)
 {
     for (Member *member : members_)
@@ -38,10 +43,14 @@ Member *MemberManager::getMemberFromId(unsigned int id)
     throw 404;
 }
 
+//return an unused member ID.
 unsigned int MemberManager::getUnusedId()
 {
     return members_.size() + 1;
 }
+
+//Log in a member
+//Return ‘true’ if the operation is successful.
 
 bool MemberManager::loginMember(std::string username, std::string password)
 {
@@ -66,6 +75,9 @@ bool MemberManager::loginMember(std::string username, std::string password)
     throw 404;
 }
 
+//Register new Member
+//Return ‘true’ if the registration is successful.
+
 bool MemberManager::registerMember(std::string username, std::string password,
                                    std::string full_name,
                                    std::string phone_number,
@@ -89,13 +101,17 @@ bool MemberManager::registerMember(std::string username, std::string password,
     return true;
 }
 
+//Log out a member
+//Return ‘true’ if the operation is successful.
+
 bool MemberManager::logoutMember()
 {
     current_member_id_ = 0;
 
     return true;
 }
-
+//initialize the MemberManager by loading member data from a file.
+//Return ‘true’ if the operation is successful.
 // very likely to break if is not serialize properly
 bool MemberManager::init(MotorbikeManager &motorbikeManager)
 {
@@ -161,6 +177,7 @@ bool MemberManager::init(MotorbikeManager &motorbikeManager)
     return true;
 }
 
+//Save current state of the member data to a file.
 bool MemberManager::save()
 {
     std::ofstream file;

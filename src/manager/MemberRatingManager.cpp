@@ -2,8 +2,10 @@
 
 #include <fstream>
 
+//Class constructor
 MemberRatingManager::MemberRatingManager() {}
 
+//Class destructor
 MemberRatingManager::~MemberRatingManager()
 {
     for (MemberRating *rating : ratings_)
@@ -12,6 +14,7 @@ MemberRatingManager::~MemberRatingManager()
     }
 }
 
+//add a MemberRating object to the ratings_ vector.
 bool MemberRatingManager::add(MemberRating *rating)
 {
     ratings_.push_back(rating);
@@ -19,11 +22,13 @@ bool MemberRatingManager::add(MemberRating *rating)
     return true;
 }
 
+//returns a vector containing pointers to all the MemberRating objects managed by the MemberRatingManager. 
 std::vector<MemberRating *> MemberRatingManager::getRatings()
 {
     return ratings_;
 }
 
+//calculates and returns the average rating for a member with the specified member_id.
 double MemberRatingManager::getAverageRating(unsigned int member_id)
 {
     double total_rating = 0;
@@ -46,6 +51,7 @@ double MemberRatingManager::getAverageRating(unsigned int member_id)
     return total_rating / count;
 }
 
+//returns a vector containing pointers to MemberRating objects associated with a member specified by their id 
 std::vector<MemberRating *> MemberRatingManager::getRatingsByOwnerId(unsigned int id)
 {
     std::vector<MemberRating *> ratings;
@@ -61,6 +67,7 @@ std::vector<MemberRating *> MemberRatingManager::getRatingsByOwnerId(unsigned in
     return ratings;
 }
 
+//returns a vector containing pointers to MemberRating objects associated with a member specified by their id 
 std::vector<MemberRating *> MemberRatingManager::getRatingsByMemberId(unsigned int id)
 {
     std::vector<MemberRating *> ratings;
@@ -76,6 +83,8 @@ std::vector<MemberRating *> MemberRatingManager::getRatingsByMemberId(unsigned i
     return ratings;
 }
 
+//initialize the MemberRatingManager by loading member rating data from a file.
+//Return ‘true’ if the operation is successful.
 bool MemberRatingManager::init(MemberManager &memberManager)
 {
     if (ratings_.size() > 0)
@@ -126,6 +135,7 @@ bool MemberRatingManager::init(MemberManager &memberManager)
     return true;
 }
 
+//Save current state of the member rating data to a file.
 bool MemberRatingManager::save()
 {
     std::ofstream file;

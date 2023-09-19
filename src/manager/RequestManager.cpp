@@ -2,6 +2,7 @@
 
 #include "RequestManager.h"
 
+//Class constructor
 RequestManager::RequestManager() {}
 
 bool RequestManager::add(Request *request)
@@ -10,16 +11,19 @@ bool RequestManager::add(Request *request)
     return true;
 }
 
+//returns an unused ID for a new request.
 unsigned int RequestManager::getUnusedId()
 {
     return requests_.size() + 1;
 }
 
+//returns a vector containing all the Request objects stored in the requests_ vector.
 std::vector<Request *> RequestManager::getRequests()
 {
     return requests_;
 }
 
+//retrieves a Request object by its unique ID.
 Request *RequestManager::getRequestFromId(unsigned int id)
 {
     for (Request *request : requests_)
@@ -33,6 +37,7 @@ Request *RequestManager::getRequestFromId(unsigned int id)
     throw 404;
 }
 
+//returns a vector containing all the requests related to a specific Motorbike.
 std::vector<Request *> RequestManager::getRequestsFromMotorbike(Motorbike &motorbike)
 {
     std::vector<Request *> requests;
@@ -47,6 +52,7 @@ std::vector<Request *> RequestManager::getRequestsFromMotorbike(Motorbike &motor
     return requests;
 }
 
+//initializes the RequestManager by loading requests from a file 
 bool RequestManager::init(MemberManager &memberManager, MotorbikeManager &motorbikeManager)
 {
     if (requests_.size() > 0)
@@ -120,6 +126,7 @@ bool RequestManager::init(MemberManager &memberManager, MotorbikeManager &motorb
     return true;
 }
 
+//saves the current state of the RequestManager to a file
 bool RequestManager::save()
 {
     std::ofstream file;
