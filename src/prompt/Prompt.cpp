@@ -236,12 +236,12 @@ void Prompt::memberViewAvailableMotorbikes(Member &member, MotorbikeManager &mot
     std::string start_date_input;
     std::cout << "Enter start date (yyyy/mm/dd): ";
     std::getline(std::cin, start_date_input);
-    Date start_date(start_date);
+    Date start_date(start_date_input);
 
     std::string end_date_input;
     std::cout << "Enter end date (yyyy/mm/dd): ";
     std::getline(std::cin, end_date_input);
-    Date end_date(end_date);
+    Date end_date(end_date_input);
 
     for (Motorbike *motorbike : motorbikeManager.getMotorbikes())
     {
