@@ -261,7 +261,6 @@ void Prompt::memberViewAvailableMotorbikes(Member &member, MotorbikeManager &mot
     std::cin.ignore();
 }
 
-
 //allows a member to send a rental request for a specific motorbike.
 void Prompt::memberRequest(Member &currentMember, MotorbikeManager &motorbikeManager, MemberRatingManager &memberRatingManager, RequestManager &requestManager)
 {
