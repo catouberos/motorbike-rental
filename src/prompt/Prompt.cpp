@@ -233,9 +233,20 @@ void Prompt::memberViewAvailableMotorbikes(Member &member, MotorbikeManager &mot
     std::cout << "Enter city: ";
     std::getline(std::cin, city);
 
+    std::string start_date_input;
+    std::cout << "Enter start date (yyyy/mm/dd): ";
+    std::getline(std::cin, start_date_input);
+    Date start_date(start_date_input);
+
+    std::string end_date_input;
+    std::cout << "Enter end date (yyyy/mm/dd): ";
+    std::getline(std::cin, end_date_input);
+    Date end_date(end_date_input);
+
     for (Motorbike *motorbike : motorbikeManager.getMotorbikes())
     {
         if (motorbike->getStartDate().getDay() != 0 &&                                            // if listed
+            motorbike->getStartDate() >= start_date && motorbike->getEndDate() <= end_date &&     // if within date range              
             motorbike->getRenterId() == 0 &&                                                      // if unrented
             motorbike->id_ != member.getOwnedMotorbike()->id_ &&                                  // if not owned by member
             motorbike->getPointConsumed() <= member.getCreditPoint() &&                           // if member has enough point
@@ -343,11 +354,11 @@ void Prompt::memberAcceptRequest(Member &currentMember, RequestManager &requestM
 {
     Utils::clrscr();
 
-    std::string request_id;
+    unsigned int request_id;
     std::cout << "Enter request id: ";
-    std::getline(std::cin, request_id);
+    std::cin >> request_id;
 
-    Request *request = requestManager.getRequestFromId(std::stoi(request_id));
+    Request *request = requestManager.getRequestFromId(request_id);
 
     if (request == nullptr)
     {
