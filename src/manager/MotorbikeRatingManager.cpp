@@ -3,8 +3,10 @@
 
 #include "MotorbikeRatingManager.h"
 
+//Class constructor
 MotorbikeRatingManager::MotorbikeRatingManager() {}
 
+//Class destructor
 MotorbikeRatingManager::~MotorbikeRatingManager()
 {
     for (MotorbikeRating *rating : ratings_)
@@ -13,6 +15,7 @@ MotorbikeRatingManager::~MotorbikeRatingManager()
     }
 }
 
+//add a MotorbikeRating object to the ratings_ vector.
 bool MotorbikeRatingManager::add(MotorbikeRating *rating)
 {
     ratings_.push_back(rating);
@@ -20,11 +23,13 @@ bool MotorbikeRatingManager::add(MotorbikeRating *rating)
     return true;
 }
 
+//returns a vector containing pointers to all the MotorbikeRating objects managed by the MotorbikeRatingManager
 std::vector<MotorbikeRating *> MotorbikeRatingManager::getRatings()
 {
     return ratings_;
 }
 
+//calculates and returns the average rating for a motorbike with the specified motorbike_id
 double MotorbikeRatingManager::getAverageRating(unsigned int motorbike_id)
 {
     double total_rating = 0;
@@ -47,6 +52,7 @@ double MotorbikeRatingManager::getAverageRating(unsigned int motorbike_id)
     return total_rating / count;
 }
 
+//returns a vector containing pointers to MotorbikeRating objects associated with a motorbike specified by its id.
 std::vector<MotorbikeRating *> MotorbikeRatingManager::getRatingsByMotorbikeId(unsigned int id)
 {
     std::vector<MotorbikeRating *> ratings;
@@ -62,6 +68,7 @@ std::vector<MotorbikeRating *> MotorbikeRatingManager::getRatingsByMotorbikeId(u
     return ratings;
 }
 
+//returns a vector containing pointers to MotorbikeRating objects associated with a renter specified by their id.
 std::vector<MotorbikeRating *> MotorbikeRatingManager::getRatingsByRenterId(unsigned int id)
 {
     std::vector<MotorbikeRating *> ratings;
@@ -77,6 +84,8 @@ std::vector<MotorbikeRating *> MotorbikeRatingManager::getRatingsByRenterId(unsi
     return ratings;
 }
 
+//initialize the MotorbikeRatingManager by loading motorbike rating data from a file.
+//Return ‘true’ if the operation is successful
 bool MotorbikeRatingManager::init(MotorbikeManager &motorbikeManager, MemberManager &memberManager)
 {
     if (ratings_.size() > 0)
@@ -127,6 +136,7 @@ bool MotorbikeRatingManager::init(MotorbikeManager &motorbikeManager, MemberMana
     return true;
 }
 
+//save the current state of the motorbike rating data to a file.
 bool MotorbikeRatingManager::save()
 {
     std::ofstream file;

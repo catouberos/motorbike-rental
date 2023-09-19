@@ -6,9 +6,9 @@
 const std::string Prompt::admin_username_ = "admin";
 const std::string Prompt::admin_password_ = "admin";
 
+//displays a welcome message and information about the assignment, instructor, and group members
 void Prompt::welcomeScreen()
 {
-    // welcome screen
     std::cout << "EEET2482 ASSIGNMENT" << std::endl
               << "MOTORBIKE RENTAL APPLICATION" << std::endl
               << std::endl
@@ -21,6 +21,7 @@ void Prompt::welcomeScreen()
               << std::endl;
 }
 
+//allows a member to log in by providing their username and password
 bool Prompt::loginMember(MemberManager &memberManager)
 {
     do
@@ -69,6 +70,7 @@ bool Prompt::loginMember(MemberManager &memberManager)
     return false;
 }
 
+//allows a logged-in member to register a motorbike they own.
 bool Prompt::memberRegisterMotorbike(Member &member, MotorbikeManager &motorbikeManager)
 {
     do
@@ -113,6 +115,7 @@ bool Prompt::memberRegisterMotorbike(Member &member, MotorbikeManager &motorbike
     return false;
 }
 
+//displays details about a member, including their information and owned motorbike.
 void Prompt::memberViewDetails(Member &member)
 {
     Utils::clrscr();
@@ -123,6 +126,7 @@ void Prompt::memberViewDetails(Member &member)
     std::cin.ignore();
 }
 
+//allows a member to add credit points to their account.
 bool Prompt::memberTopup(Member &member)
 {
     do
@@ -165,6 +169,7 @@ bool Prompt::memberTopup(Member &member)
     return false;
 }
 
+//allows a member to list a motorbike they own for rent.
 void Prompt::memberListMotorbike(Member &currentMember)
 {
     Utils::clrscr();
@@ -192,6 +197,7 @@ void Prompt::memberListMotorbike(Member &currentMember)
     std::cin.ignore();
 }
 
+//allows a member to unlist a motorbike they own, removing it from the available motorbike list.
 void Prompt::memberUnlistMotorbike(Member &currentMember)
 {
     Utils::clrscr();
@@ -218,6 +224,7 @@ void Prompt::memberUnlistMotorbike(Member &currentMember)
     std::cin.ignore();
 }
 
+//allows a member to view motorbikes available for rent.
 void Prompt::memberViewAvailableMotorbikes(Member &member, MotorbikeManager &motorbikeManager, MemberRatingManager &memberRatingManager)
 {
     Utils::clrscr();
@@ -243,6 +250,7 @@ void Prompt::memberViewAvailableMotorbikes(Member &member, MotorbikeManager &mot
     std::cin.ignore();
 }
 
+//allows a member to send a rental request for a specific motorbike.
 void Prompt::memberRequest(Member &currentMember, MotorbikeManager &motorbikeManager, MemberRatingManager &memberRatingManager, RequestManager &requestManager)
 {
     Utils::clrscr();
@@ -311,8 +319,12 @@ void Prompt::memberRequest(Member &currentMember, MotorbikeManager &motorbikeMan
 
     Request *request = new Request(requestManager.getUnusedId(), &currentMember, motorbike, RequestState::PENDING);
     requestManager.add(request);
+    std::cout << "Request sent!" << std::endl;
+    std::cout << "Press any key to exit" << std::endl;
+    std::cin.ignore();
 }
 
+//allows a member to view their rental requests.
 void Prompt::memberViewRequests(Member &currentMember, RequestManager &requestManager)
 {
     Utils::clrscr();
@@ -326,6 +338,7 @@ void Prompt::memberViewRequests(Member &currentMember, RequestManager &requestMa
     std::cin.ignore();
 }
 
+//allows a member to accept a pending rental request for their motorbike.
 void Prompt::memberAcceptRequest(Member &currentMember, RequestManager &requestManager)
 {
     Utils::clrscr();
@@ -374,6 +387,7 @@ void Prompt::memberAcceptRequest(Member &currentMember, RequestManager &requestM
     }
 }
 
+//allows a member to view their motorbike’s renter
 void Prompt::memberViewRenters(Member &currentMember, RequestManager &requestManager)
 {
     Utils::clrscr();
@@ -390,6 +404,7 @@ void Prompt::memberViewRenters(Member &currentMember, RequestManager &requestMan
     std::cin.ignore();
 }
 
+//allows a member to rate their motorbike’s renter
 void Prompt::memberRateRenter(Member &currentMember, MemberManager &memberManager, MemberRatingManager &memberRatingManager)
 {
     Utils::clrscr();
@@ -420,6 +435,7 @@ void Prompt::memberRateRenter(Member &currentMember, MemberManager &memberManage
     return;
 }
 
+//allows a member to rate their rented motorbike
 void Prompt::memberRateMotorbike(Member &currentMember, MotorbikeRatingManager &motorbikeRatingManager)
 {
     Utils::clrscr();
@@ -441,6 +457,7 @@ void Prompt::memberRateMotorbike(Member &currentMember, MotorbikeRatingManager &
     return;
 }
 
+//Allows a member to return their rented motorbike
 void Prompt::memberReturnMotorbike(Member &currentMember)
 {
     Utils::clrscr();
@@ -453,6 +470,7 @@ void Prompt::memberReturnMotorbike(Member &currentMember)
     std::cin.ignore();
 }
 
+//allows a guest to register as a new member.
 bool Prompt::registerMember(MemberManager &memberManager)
 {
     do
@@ -541,6 +559,7 @@ bool Prompt::registerMember(MemberManager &memberManager)
     return false;
 }
 
+//allows a guest to view a list of available motorbikes.
 void Prompt::guestViewMotorbikes(MotorbikeManager &motorbikeManager, MotorbikeRatingManager &motorbikeRatingManager)
 {
     Utils::clrscr();
@@ -555,6 +574,7 @@ void Prompt::guestViewMotorbikes(MotorbikeManager &motorbikeManager, MotorbikeRa
     std::cin.ignore();
 }
 
+//allows an admin to log in to the application.
 bool Prompt::loginAdmin()
 {
     do
@@ -591,6 +611,7 @@ bool Prompt::loginAdmin()
     } while (true);
 }
 
+//allows an admin to view a list of all members and their average ratings.
 void Prompt::adminViewMembers(MemberManager &memberManager, MemberRatingManager &memberRatingManager)
 {
     Utils::clrscr();
@@ -607,6 +628,7 @@ void Prompt::adminViewMembers(MemberManager &memberManager, MemberRatingManager 
     std::cin.ignore();
 }
 
+//allows an admin to view a list of all motorbikes and their average ratings.
 void Prompt::adminViewMotorbikes(MotorbikeManager &motorbikeManager, MotorbikeRatingManager &motorbikeRatingManager)
 {
     Utils::clrscr();

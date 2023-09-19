@@ -4,6 +4,7 @@
 
 #include "Motorbike.h"
 
+//Class constructor
 Motorbike::Motorbike(
     unsigned int id,
     std::string model,
@@ -31,21 +32,25 @@ Motorbike::Motorbike(
                               owner_id_(owner_id),
                               renter_id_(renter_id){};
 
+//returns the start date of when the motorbike is rented as a Date object.
 Date Motorbike::getStartDate()
 {
     return start_date_;
 }
 
+//returns the end date of when the motorbike is rented as a Date object.
 Date Motorbike::getEndDate()
 {
     return end_date_;
 }
 
+//returns the ID of the member who is renting the motorbike.
 unsigned int Motorbike::getRenterId()
 {
     return renter_id_;
 }
 
+//set the motorbike as available for rent.
 bool Motorbike::setList(Date start_date, Date end_date, unsigned int point_consume, double required_rating)
 {
     start_date_ = start_date;
@@ -56,6 +61,7 @@ bool Motorbike::setList(Date start_date, Date end_date, unsigned int point_consu
     return true;
 }
 
+//mark the motorbike as unavailable for rent
 bool Motorbike::setUnlist()
 {
     if (renter_id_ == 0)
@@ -71,6 +77,7 @@ bool Motorbike::setUnlist()
     return true;
 }
 
+//set the ID of the member who is renting the motorbike.
 bool Motorbike::setRenterId(unsigned int renter_id)
 {
     renter_id_ = renter_id;
@@ -78,21 +85,25 @@ bool Motorbike::setRenterId(unsigned int renter_id)
     return true;
 }
 
+//returns the number of points consumed for renting the motorbike
 unsigned int Motorbike::getPointConsumed()
 {
     return point_consume_;
 }
 
+//returns the required rating for renting the motorbike.
 double Motorbike::getRequiredRating()
 {
     return required_rating_;
 }
 
+//returns the location of the motorbike as a string.
 std::string Motorbike::getLocation()
 {
     return location_;
 }
 
+//returns a human-readable string representation.
 std::string Motorbike::toString(bool detailed)
 {
     std::ostringstream oss;
@@ -146,6 +157,7 @@ std::string Motorbike::toString(bool detailed)
     return oss.str();
 }
 
+//returns a string representation suitable for storage.
 std::string Motorbike::serialize()
 {
     return std::to_string(id_) + ',' +

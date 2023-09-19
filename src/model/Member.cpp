@@ -3,6 +3,7 @@
 
 #include "Member.h"
 
+//Class constructor
 Member::Member(unsigned int id,
                std::string username,
                std::string password,
@@ -21,38 +22,45 @@ Member::Member(unsigned int id,
       credit_point_(credit_point), owned_motorbike_(owned_motorbike),
       rented_motorbike_(rented_motorbike){};
 
+//set the owned motorbike for a member
 bool Member::setOwnedMotorbike(Motorbike *motorbike)
 {
     owned_motorbike_ = motorbike;
     return true;
 }
 
+//set the rented motorbike for a member
 bool Member::setRentedMotorbike(Motorbike *motorbike)
 {
     rented_motorbike_ = motorbike;
     return true;
 }
 
+//returns the full name of the member as a string
 std::string Member::getFullName()
 {
     return full_name_;
 }
 
+//returns the credit points of the member
 unsigned int Member::getCreditPoint()
 {
     return credit_point_;
 }
 
+//returns a pointer to the owned motorbike by the member
 Motorbike *Member::getOwnedMotorbike()
 {
     return owned_motorbike_;
 }
 
+//returns a pointer to the rented motorbike by the member
 Motorbike *Member::getRentedMotorbike()
 {
     return rented_motorbike_;
 }
 
+//add credit points to the member's account
 bool Member::topUp(unsigned int amount)
 {
     if (amount < 0)
@@ -64,6 +72,7 @@ bool Member::topUp(unsigned int amount)
     return true;
 }
 
+//returns a human-readable string representation.
 std::string Member::toString(bool detailed)
 {
     std::ostringstream oss;
@@ -111,6 +120,7 @@ std::string Member::toString(bool detailed)
     return oss.str();
 }
 
+//returns a string representation suitable for storage.
 std::string Member::serialize()
 {
     return std::to_string(id_) + ',' +

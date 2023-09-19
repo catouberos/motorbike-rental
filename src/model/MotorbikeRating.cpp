@@ -2,9 +2,11 @@
 
 #include "MotorbikeRating.h"
 
+//Class constructor
 MotorbikeRating::MotorbikeRating(Member *renter, Motorbike *motorbike, double rating, std::string review)
     : renter{renter}, motorbike{motorbike}, rating_{rating}, review_{review} {}
 
+//returns a human-readable string representation.
 std::string MotorbikeRating::toString()
 {
     std::ostringstream oss;
@@ -16,6 +18,7 @@ std::string MotorbikeRating::toString()
     return oss.str();
 }
 
+//returns a string representation suitable for storage.
 std::string MotorbikeRating::serialize()
 {
     std::ostringstream oss;
