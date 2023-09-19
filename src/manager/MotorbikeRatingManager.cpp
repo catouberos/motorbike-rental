@@ -86,7 +86,6 @@ std::vector<MotorbikeRating *> MotorbikeRatingManager::getRatingsByRenterId(unsi
 
 //initialize the MotorbikeRatingManager by loading motorbike rating data from a file.
 //Return ‘true’ if the operation is successful
-
 bool MotorbikeRatingManager::init(MotorbikeManager &motorbikeManager, MemberManager &memberManager)
 {
     if (ratings_.size() > 0)

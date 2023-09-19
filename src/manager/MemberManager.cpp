@@ -51,7 +51,6 @@ unsigned int MemberManager::getUnusedId()
 
 //Log in a member
 //Return ‘true’ if the operation is successful.
-
 bool MemberManager::loginMember(std::string username, std::string password)
 {
     bool match = false;
@@ -77,7 +76,6 @@ bool MemberManager::loginMember(std::string username, std::string password)
 
 //Register new Member
 //Return ‘true’ if the registration is successful.
-
 bool MemberManager::registerMember(std::string username, std::string password,
                                    std::string full_name,
                                    std::string phone_number,
@@ -103,13 +101,13 @@ bool MemberManager::registerMember(std::string username, std::string password,
 
 //Log out a member
 //Return ‘true’ if the operation is successful.
-
 bool MemberManager::logoutMember()
 {
     current_member_id_ = 0;
 
     return true;
 }
+
 //initialize the MemberManager by loading member data from a file.
 //Return ‘true’ if the operation is successful.
 // very likely to break if is not serialize properly

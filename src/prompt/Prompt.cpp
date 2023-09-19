@@ -457,7 +457,7 @@ void Prompt::memberRateMotorbike(Member &currentMember, MotorbikeRatingManager &
     return;
 }
 
-//
+//Allows a member to return their rented motorbike
 void Prompt::memberReturnMotorbike(Member &currentMember)
 {
     Utils::clrscr();
