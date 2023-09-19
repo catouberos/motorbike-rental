@@ -16,6 +16,7 @@ std::string Account::toString(bool detailed)
 
     return oss.str();
 }
+
 //returns a string representation suitable for storage.
 std::string Account::serialize()
 {
