@@ -31,3 +31,6 @@
 *.out
 *.app
 .vscode/settings.json
+customer.dat
+motorbike.dat
+requests.dat
